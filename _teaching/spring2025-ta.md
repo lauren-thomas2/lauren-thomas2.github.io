@@ -1,5 +1,5 @@
 ---
-title: "Teaching Assistant"
+title: "Hydrology Teaching Assistant"
 collection: teaching
 type: "<b>Our Changing Planet: Landscapes and Water</b>"
 permalink: /teaching/spring2025-ta
