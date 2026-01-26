@@ -2,7 +2,7 @@
 title: "Teaching Assistant"
 collection: teaching
 type: "Principles of Geomorphology"
-permalink: /teaching/spring2024-ta
+permalink: /teaching/fall2024-ta
 venue: "University of Colorado Boulder, Geography Department"
 date: 2024-08-20
 location: "Boulder, CO"
