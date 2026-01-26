@@ -1,5 +1,5 @@
 ---
-title: "Teaching Assistant"
+title: "Geomorphology Teaching Assistant"
 collection: teaching
 type: " <b>Principles of Geomorphology</b>"
 permalink: /teaching/fall2024-ta
