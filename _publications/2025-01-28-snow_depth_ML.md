@@ -2,7 +2,7 @@
 title: "Brief communication: Monitoring snow depth using small, cheap, and easy-to-deploy snow-ground interface temperature sensors"
 collection: publications
 category: manuscripts
-permalink: /publication/2025-01-28-SnowDepthML
+permalink: /publication/2025-01-28-snow_depth_ML
 date: 2025-01-28
 venue: 'The Cryosphere'
 link: https://doi.org/10.5194/tc-19-393-2025
