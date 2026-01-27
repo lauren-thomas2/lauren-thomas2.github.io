@@ -4,7 +4,8 @@ collection: publications
 category: datasets
 permalink: /publication/2024-ibuttons-nm
 date: 2024-02-17
-venue: 'GitHub Journal of Bugs'
-paperurl: 'https://academicpages.github.io/files/paper3.pdf'
-citation: 'Your Name, You. (2024). &quot;Paper Title Number 3.&quot; <i>GitHub Journal of Bugs</i>. 1(3).'
+venue: 'Environmental System Science Data Infrastructure for a Virtual Ecosystem'
+#paperurl: 'https://academicpages.github.io/files/paper3.pdf'
+link: https://doi.org/10.15485/2338028
+citation: 'Thomas, L., Bachand, C., Maebius, S. (2024). &quot;iButton snow-ground interface temperature measurements in Los Alamos, New Mexico from 2023-2024.&quot; <i>ESS-DIVE</i>.'
 ---
