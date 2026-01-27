@@ -64,9 +64,9 @@ I am a graduate student in the Geography Department at the University of Colorad
          <a href="${loc.link}">${loc.label}</a>`
       );
   });
-</script>
-var bounds = L.latLngBounds(locations.map(l => l.coords));
+  var bounds = L.latLngBounds(locations.map(l => l.coords));
 map.fitBounds(bounds);
+</script>
 
 
 
