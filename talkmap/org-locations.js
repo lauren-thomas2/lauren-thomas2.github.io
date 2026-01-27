@@ -10,13 +10,13 @@ var addressPoints = [
     -0.1277653
   ],
   [
+    "Rain-on-snow processes and their impacts on snowpack and subsurface thermal regimes in sub-Arctic Alaska<br />AGU Fall Meeting 2024; Washington, DC, USA",
+    38.8950368,
+    -77.0365427
+  ],
+  [
     "Tutorial 1 on Relevant Topic in Your Field<br />UC-Berkeley Institute for Testing Science; Berkeley, CA, USA",
     37.8708393,
     -122.272863
-  ],
-  [
-    "Talk 1 on Relevant Topic in Your Field<br />UC San Francisco, Department of Testing; San Francisco, CA, USA",
-    37.7879363,
-    -122.4075201
   ]
 ];
