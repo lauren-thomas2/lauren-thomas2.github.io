@@ -6,7 +6,7 @@ redirect_from:
   - /about/
   - /about.html
 ---
-I'm a graduate student at the University of Colorado Boulder studying how human alteration has impacted floodplain carbon storage. Check out some of the research I've contributed to:
+I'm a graduate student at the University of Colorado Boulder studying how human alteration has impacted floodplain carbon storage. Check out my research:
 
 <div id="map" style="height: 400px; margin: 2em 0;"></div>
 <link
