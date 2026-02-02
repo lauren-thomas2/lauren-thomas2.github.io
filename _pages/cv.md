@@ -13,6 +13,8 @@ Education
 ======
 * M.A. Candidate in Geography, University of Colorado Boulder, Expected 2026
 * B.S. in Environmental Science, University of Maryland, 2021
+  * Remote Sensing Minor
+* B.A. in Criminology & Criminal Justice, University of Maryland, 2021
 
 Work experience
 ======
@@ -24,6 +26,12 @@ Work experience
   
 * June 2021 - July 2023: Post-Bachelor's Student
   * Earth and Environmental Sciences Division, Los Alamos National Laboratory
+ 
+* May 2021 - June 2021: Remote Sensing Analyst Intern
+  * Global Land Analysis and Discovery Laboratory (GLAD Lab), University of Maryland
+ 
+* October 2018 - December 2019: Intern Aquarist and Research Assistant
+  * Invertebrate Zoology Laboratory, Smithsonian Institution - National Museum of Natural History
   
 Publications
 ======
