@@ -40,14 +40,14 @@ I'm a graduate student at the University of Colorado Boulder studying how human 
       coords: [45.599968, -93.264123],
       link: "/publication",
       label: "Current Research",
-      image: "/images/project1-photo.jpg"
+      image: "/images/RumRiver.jpg"
     },
     {
       name: "San Pedro River Floodplain",
       coords: [32.791884, -110.683569],
       link: "/publication",
       label: "Current Research",
-      image: "/images/project1-photo.jpg"
+      image: "/images/SanPedro.jpg"
     },
     {
       name: "Kougarok Fire Complex",
