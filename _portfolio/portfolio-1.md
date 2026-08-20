@@ -1,6 +1,6 @@
 ---
-title: "News Article: UMD Study: While Some Forest Losses Recover Others Permanently Lost"
-excerpt: "Short description of portfolio item number 1<br/><img src='/images/GlobalForestLoss.png'>"
+title: "UMD Study: While Some Forest Losses Recover Others Permanently Lost"
+excerpt: "News Article<br/><img src='/images/GlobalForestLoss.png'>"
 collection: portfolio
 ---
 
