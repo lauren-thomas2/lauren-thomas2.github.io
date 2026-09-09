@@ -24,13 +24,13 @@ University of Colorado Boulder, 2026
 <img src="/img/TNC_SPRiver.jpg" width="45%" style="border: solid 1px black;" hspace="7"/> <img src="https://d9-wret.s3.us-west-2.amazonaws.com/assets/palladium/production/s3fs-public/styles/full_width/public/media/images/L9_073011_20220701_B543_Prudhoe_Bay_AK.jpg?itok=s2TACtf-" width="45%" style="border: solid 1px black;" hspace="10"/>
 
 ---
-
+<!-- using &emsp; for adjusting title spacing based on stack overflow suggestions -->
 ### Previous Projects:
-&emsp;[Drivers of Global Tree Loss](https://doi.org/10.1126/science.adz9042)&emsp;&emsp;&emsp;[ML Snow Depth Predictions](https://doi.org/10.5194/tc-19-393-2025)\
+&emsp;&emsp;[Drivers of Global Tree Loss](https://doi.org/10.1126/science.adz9042)&emsp;&emsp;&emsp;&emsp;[ML Snow Depth Predictions](https://doi.org/10.5194/tc-19-393-2025)\
 <img src="/img/Global_Tree_Loss.jpg?raw=true" width="45%" style="border: solid 1px black;" hspace="7"/> <img src="/img/Arctic_Snow.JPG?raw=true" width="45%" style="border: solid 1px black;" hspace="10"/>
 
-[Vegetation & Subarctic Snowpacks](https://doi.org/10.1002/ppp.2263)&emsp;&emsp;&emsp;[Arctic Rainfall Simulations](https://doi.org/10.2166/nh.2023.146)\
-<img src="/img/Snow_Veg.JPG?raw=true" width="45%" style="border: solid 1px black;" hspace="7"/> <img src="/img/Arctic_RFS.jpg?raw=true" width="45%" style="border: solid 1px black;" hspace="10"/>
+[Vegetation & Subarctic Snowpacks](https://doi.org/10.1002/ppp.2263)&emsp;&emsp;&emsp;&emsp;[Arctic Rainfall Simulations](https://doi.org/10.2166/nh.2023.146)\
+&emsp;<img src="/img/Snow_Veg.JPG?raw=true" width="45%" style="border: solid 1px black;" hspace="7"/> <img src="/img/Arctic_RFS.jpg?raw=true" width="45%" style="border: solid 1px black;" hspace="10"/>
 
 ---
 
