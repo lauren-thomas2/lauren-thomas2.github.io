@@ -3,7 +3,19 @@
 ---
 
 ### About
-I'm a graduate student working in the [RIVER Lab](https://www.colorado.edu/lab/liningerfluvialgeomorphgroup/) as part of CU Boulder's Department of Geography. My current research primarily focuses on combining field work and geospatial analyses to answer questions about river and floodplain carbon storage and transport. 
+I'm a graduate student working in the [RIVER Lab](https://www.colorado.edu/lab/liningerfluvialgeomorphgroup/) in CU Boulder's Department of Geography. My current research combines field work and geospatial analyses to answer questions about river and floodplain carbon storage and transport. 
+
+---
+
+### Education
+**B.S. Environmental Science**\
+University of Maryland, 2021
+
+**B.A. Criminology & Criminal Justice**\
+University of Maryland, 2021
+
+**M.A. Geography**\
+University of Colorado Boulder, 2026
 
 ---
 
@@ -27,12 +39,8 @@ Floodplain Carbon Storage in Permafrost Environments
 
 <img src="/img/Shrub_PF_Interactions.png?raw=true" width="50%" style="border: solid 2px black;"/>
 
-### Education
-**B.S. Environmental Science**
-University of Maryland, 2021
+---
 
-**B.A. Criminology & Criminal Justice**
-University of Maryland, 2021
+### GEOG5463 Portfolio
+Coming Soon!
 
-**M.A. Geography**
-University of Colorado Boulder, 2026
