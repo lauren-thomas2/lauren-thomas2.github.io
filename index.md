@@ -1,17 +1,26 @@
-## Lauren Thomas
-This is my portfolio for GEOG5463. I'm a graduate student in the [RIVER Lab](https://www.colorado.edu/lab/liningerfluvialgeomorphgroup/) at CU Boulder's Department of Geography.
+## Portfolio
 
-![Lauren Thomas](/img/LThomas.jpeg "Lauren Thomas")
+---
+
+### About
+I'm a graduate student working in the [RIVER Lab](https://www.colorado.edu/lab/liningerfluvialgeomorphgroup/) as part of CU Boulder's Department of Geography. My current research primarily focuses on combining field work and geospatial analyses to answer questions about river and floodplain carbon storage and transport. 
+
+---
+
+[Investigating the Effects of Human Alteration on Floodplain Carbon Storage]
+
 
 ![The Sag River on the North Slope of Alaska](https://d9-wret.s3.us-west-2.amazonaws.com/assets/palladium/production/s3fs-public/styles/full_width/public/media/images/L9_073011_20220701_B543_Prudhoe_Bay_AK.jpg?itok=s2TACtf- "Sag River, AK")
 
-### About
-My research primarily focuses on combining field work and geospatial analyses to answer questions about river and floodplain carbon storage and transport. 
+---
 
 Check out some of my previous research contributions:
-Global Tree Loss       | Vegetation Influences Subarctic Snowpack
-:---------------------------:|:----------------------------------------:
-![<img src="/img/Global_Tree_Loss.png">](https://doi.org/10.1126/science.adz9042) | ![<img src="/img/Shrub_PF_Interactions.png">](https://doi.org/10.1002/ppp.2263)
+
+[Drivers of Global Tree Loss](https://doi.org/10.1126/science.adz9042)
+<img src="/img/Global_Tree_Loss.png?raw=true"/>
+
+[Vegetation Influences Subarctic Snowpack](https://doi.org/10.1002/ppp.2263)
+<img src="/img/Shrub_PF_Interactions.png?raw=true"/>
 
 ### Education
 #### **B.S. Environmental Science**
@@ -22,8 +31,3 @@ Global Tree Loss       | Vegetation Influences Subarctic Snowpack
 
 #### **M.A. Geography**
 **University of Colorado Boulder** 2026
-
-### Contact Me
-* Email: Lauren.thomas-2@colorado.edu
-* [Github profile](https://github.com/lauren-thomas2)
-* [LinkedIn](www.linkedin.com/in/lauren-thomas-202)
