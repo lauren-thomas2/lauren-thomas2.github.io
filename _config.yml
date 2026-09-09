@@ -1,7 +1,9 @@
+#Reference for formatting https://chriskhanhtran.github.io/_posts/2020-01-13-portfolio-tutorial/
+
 theme: 
 title: Lauren Thomas
-logo: "/img/LThomas.jpeg"
-description: 
+logo: "/img/LThomas.jpeg?raw=true"
+description: >
 A portfolio of my work
 <a href="https://orcid.org/0000-0001-5002-2177">View My ORCID</a>
 <a href="https://github.com/lauren-thomas2">View My GitHub Profile</a>
