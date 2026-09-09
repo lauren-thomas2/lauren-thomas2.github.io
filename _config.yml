@@ -4,10 +4,10 @@ theme:
 title: Lauren Thomas
 logo: "/img/LThomas.jpeg?raw=true"
 description: >
-A portfolio of my work
-<a href="https://orcid.org/0000-0001-5002-2177">View My ORCID</a>
-<a href="https://github.com/lauren-thomas2">View My GitHub Profile</a>
-<a href="https://www.linkedin.com/in/lauren-thomas-202">View My LinkedIn Profile</a>
+  A portfolio of my work
+  <a href="https://orcid.org/0000-0001-5002-2177">View My ORCID</a>
+  <a href="https://github.com/lauren-thomas2">View My GitHub Profile</a>
+  <a href="https://www.linkedin.com/in/lauren-thomas-202">View My LinkedIn Profile</a>
 
 remote_theme: pages-themes/minimal@v0.2.0
 plugins:
