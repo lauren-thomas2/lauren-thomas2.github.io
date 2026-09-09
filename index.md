@@ -26,10 +26,10 @@ University of Colorado Boulder, 2026
 ---
 
 ### Previous Projects:
-[Drivers of Global Tree Loss](https://doi.org/10.1126/science.adz9042)&emsp;[ML Snow Depth Predictions](https://doi.org/10.5194/tc-19-393-2025)\
+[Drivers of Global Tree Loss](https://doi.org/10.1126/science.adz9042)&emsp;&emsp;[ML Snow Depth Predictions](https://doi.org/10.5194/tc-19-393-2025)\
 <img src="/img/Global_Tree_Loss.jpg?raw=true" width="45%" style="border: solid 2px black;" hspace="7"/> <img src="/img/Arctic_Snow.JPG?raw=true" width="45%" style="border: solid 2px black;" hspace="10"/>
 
-[Vegetation & Subarctic Snowpacks](https://doi.org/10.1002/ppp.2263)&emsp;[Arctic Rainfall Simulations](https://doi.org/10.2166/nh.2023.146)\
+[Vegetation & Subarctic Snowpacks](https://doi.org/10.1002/ppp.2263)&emsp;&emsp;[Arctic Rainfall Simulations](https://doi.org/10.2166/nh.2023.146)\
 <img src="/img/Shrub_PF_Interactions.png?raw=true" width="45%" style="border: solid 2px black;" hspace="7"/> <img src="https://ars.els-cdn.com/content/image/1-s2.0-S1998956326003861-hydrology-d-23-00146gf01.jpg" width="45%" style="border: solid 2px black;" hspace="10"/>
 
 ---
@@ -37,7 +37,7 @@ University of Colorado Boulder, 2026
 ### GEOG5463 Portfolio
 
 #### My First Map
-Here is a map of the Rum River, MN
+Here is a map of the **Rum River, MN** where I completed my most recent fieldwork. We chose the Rum River as a study site because it has a gradient of human impacts within the floodplain, making it an ideal location to assess changes in floodplain organic carbon stocks in the Midwest U.S.
 
-<embed type="text/html" src="img/haskell.html" width="600" height="600">
+<embed type="text/html" src="img/rumriver.html" width="600" height="600">
 
