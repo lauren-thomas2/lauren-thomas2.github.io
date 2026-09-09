@@ -20,24 +20,26 @@ University of Colorado Boulder, 2026
 ---
 
 ### Current Research
-Investigating the Effects of Human Alteration on Floodplain Carbon Storage
-
+[Investigating the Effects of Human Alteration on Floodplain Carbon Storage](https://www.colorado.edu/lab/liningerfluvialgeomorphgroup/research-projects)\
 <img src="https://natureconservancy-h.assetsadobe.com/is/image/content/dam/tnc/nature/en/photos/t/n/tnc_89147553.jpg" width="50%" style="border: solid 2px black;"/>
 
-Floodplain Carbon Storage in Permafrost Environments
-
+Connectivity and Fluxes in Arctic Deltas\
 <img src="https://d9-wret.s3.us-west-2.amazonaws.com/assets/palladium/production/s3fs-public/styles/full_width/public/media/images/L9_073011_20220701_B543_Prudhoe_Bay_AK.jpg?itok=s2TACtf-" width="50%" style="border: solid 2px black;"/>
 
 ---
 
-### Check out some of my previous research contributions:
-[Drivers of Global Tree Loss](https://doi.org/10.1126/science.adz9042)
-
+### Previous Research Contributions:
+[Drivers of Global Tree Loss](https://doi.org/10.1126/science.adz9042)\
 <img src="/img/Global_Tree_Loss.png?raw=true" width="50%" style="border: solid 2px black;"/>
 
-[Vegetation Influences Subarctic Snowpacks](https://doi.org/10.1002/ppp.2263)
+[ML Predictions of Continuous Snow Depths](https://doi.org/10.5194/tc-19-393-2025)\
+<img src="/img/Arctic_Snow.JPG?raw=true" width="50%" style="border: solid 2px black;"/>
 
+[Vegetation Influences Subarctic Snowpacks](https://doi.org/10.1002/ppp.2263)\
 <img src="/img/Shrub_PF_Interactions.png?raw=true" width="50%" style="border: solid 2px black;"/>
+
+[Developing Methods for Arctic Rainfall Simulations](https://doi.org/10.2166/nh.2023.146)\
+<img src="https://ars.els-cdn.com/content/image/1-s2.0-S1998956326003861-hydrology-d-23-00146gf01.jpg" width="50%" style="border: solid 2px black;"/>
 
 ---
 
