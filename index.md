@@ -9,9 +9,10 @@ I'm a graduate student working in the [RIVER Lab](https://www.colorado.edu/lab/l
 
 ### Current Research
 Investigating the Effects of Human Alteration on Floodplain Carbon Storage
+<img src="https://natureconservancy-h.assetsadobe.com/is/image/content/dam/tnc/nature/en/photos/t/n/tnc_89147553.jpg" width="50%" style="border: solid 2px black;"/>
 
-
-![The Sag River on the North Slope of Alaska](https://d9-wret.s3.us-west-2.amazonaws.com/assets/palladium/production/s3fs-public/styles/full_width/public/media/images/L9_073011_20220701_B543_Prudhoe_Bay_AK.jpg?itok=s2TACtf- "Sag River, AK")
+Floodplain Carbon Storage in Permafrost Environments
+<img src="https://d9-wret.s3.us-west-2.amazonaws.com/assets/palladium/production/s3fs-public/styles/full_width/public/media/images/L9_073011_20220701_B543_Prudhoe_Bay_AK.jpg?itok=s2TACtf-" width="50%" style="border: solid 2px black;"/>
 
 ---
 
@@ -20,16 +21,16 @@ Investigating the Effects of Human Alteration on Floodplain Carbon Storage
 
 <img src="/img/Global_Tree_Loss.png?raw=true" width="50%" style="border: solid 2px black;"/>
 
-[Vegetation Influences Subarctic Snowpack](https://doi.org/10.1002/ppp.2263)
+[Vegetation Influences Subarctic Snowpacks](https://doi.org/10.1002/ppp.2263)
 
 <img src="/img/Shrub_PF_Interactions.png?raw=true" width="50%" style="border: solid 2px black;"/>
 
 ### Education
 **B.S. Environmental Science**
-University of Maryland 2021
+University of Maryland, 2021
 
 **B.A. Criminology & Criminal Justice**
-University of Maryland 2021
+University of Maryland, 2021
 
 **M.A. Geography**
-University of Colorado Boulder 2026
+University of Colorado Boulder, 2026
