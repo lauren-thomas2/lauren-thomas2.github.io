@@ -20,8 +20,8 @@ University of Colorado Boulder, 2026
 ---
 
 ### Current Research
-&emsp;&emsp;&emsp;[Human Alteration Affects Floodplain Carbon Storage](https://www.colorado.edu/lab/liningerfluvialgeomorphgroup/research-projects)&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Connectivity and Fluxes in Arctic Deltas\
-<img src="/img/TNC_SPRiver.jpg" width="45%" style="border: solid 2px black;" hspace="20"/> <img src="https://d9-wret.s3.us-west-2.amazonaws.com/assets/palladium/production/s3fs-public/styles/full_width/public/media/images/L9_073011_20220701_B543_Prudhoe_Bay_AK.jpg?itok=s2TACtf-" width="45%" style="border: solid 2px black;" hspace="20"/>
+[Human Alteration Affects Floodplain Carbon Storage](https://www.colorado.edu/lab/liningerfluvialgeomorphgroup/research-projects)&emsp;&emsp;&emsp;&emsp;Connectivity and Fluxes in Arctic Deltas\
+<img src="/img/TNC_SPRiver.jpg" width="45%" style="border: solid 2px black;" hspace="10"/> <img src="https://d9-wret.s3.us-west-2.amazonaws.com/assets/palladium/production/s3fs-public/styles/full_width/public/media/images/L9_073011_20220701_B543_Prudhoe_Bay_AK.jpg?itok=s2TACtf-" width="45%" style="border: solid 2px black;" hspace="10"/>
 
 ---
 
