@@ -30,7 +30,7 @@ University of Colorado Boulder, 2026
 <img src="/img/Global_Tree_Loss.jpg?raw=true" width="45%" style="border: solid 2px black;" hspace="7"/> <img src="/img/Arctic_Snow.JPG?raw=true" width="45%" style="border: solid 2px black;" hspace="10"/>
 
 [Vegetation & Subarctic Snowpacks](https://doi.org/10.1002/ppp.2263)&emsp;&emsp;[Arctic Rainfall Simulations](https://doi.org/10.2166/nh.2023.146)\
-<img src="/img/Shrub_PF_Interactions.png?raw=true" width="45%" style="border: solid 2px black;" hspace="7"/> <img src="https://ars.els-cdn.com/content/image/1-s2.0-S1998956326003861-hydrology-d-23-00146gf01.jpg" width="45%" style="border: solid 2px black;" hspace="10"/>
+<img src="/img/Snow_Veg.JPG?raw=true" width="45%" style="border: solid 2px black;" hspace="7"/> <img src="/img/Arctic_RFS.jpg?raw=true" width="45%" style="border: solid 2px black;" hspace="10"/>
 
 ---
 
