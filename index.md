@@ -20,7 +20,7 @@ University of Colorado Boulder, 2026
 ---
 
 ### Current Research
-&emsp;[Altered Floodplain Carbon Storage](https://www.colorado.edu/lab/liningerfluvialgeomorphgroup/research-projects)&emsp;Arctic Delta Connectivity & Fluxes\
+&emsp;[Altered Floodplain Carbon Storage](https://www.colorado.edu/lab/liningerfluvialgeomorphgroup/research-projects)&emsp;&emsp;Arctic Delta Connectivity & Fluxes\
 <img src="/img/TNC_SPRiver.jpg" width="45%" style="border: solid 1px black;" hspace="7"/> <img src="https://d9-wret.s3.us-west-2.amazonaws.com/assets/palladium/production/s3fs-public/styles/full_width/public/media/images/L9_073011_20220701_B543_Prudhoe_Bay_AK.jpg?itok=s2TACtf-" width="45%" style="border: solid 1px black;" hspace="10"/>
 
 ---
@@ -37,7 +37,7 @@ University of Colorado Boulder, 2026
 ### GEOG5463 Portfolio
 
 #### My First Map
-Here is a map of a segment of the **Rum River, MN** where I completed my most recent fieldwork. We chose the Rum River as a study site because its floodplain has been altered by a gradient of human impacts, making it an ideal location to assess changes in floodplain organic carbon stocks in the Midwest U.S.
+Here is a map of a segment of the **Rum River, Minnesota** where I completed my most recent fieldwork. We chose the Rum River as a study site because its floodplain has been altered by a gradient of human impacts, making it an ideal location to assess changes in floodplain organic carbon stocks in the Midwest U.S.
 
 <embed type="text/html" src="img/rumriver.html" width="600" height="600">
 
