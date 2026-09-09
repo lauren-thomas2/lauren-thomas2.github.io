@@ -9,9 +9,11 @@ I'm a graduate student working in the [RIVER Lab](https://www.colorado.edu/lab/l
 
 ### Current Research
 Investigating the Effects of Human Alteration on Floodplain Carbon Storage
+
 <img src="https://natureconservancy-h.assetsadobe.com/is/image/content/dam/tnc/nature/en/photos/t/n/tnc_89147553.jpg" width="50%" style="border: solid 2px black;"/>
 
 Floodplain Carbon Storage in Permafrost Environments
+
 <img src="https://d9-wret.s3.us-west-2.amazonaws.com/assets/palladium/production/s3fs-public/styles/full_width/public/media/images/L9_073011_20220701_B543_Prudhoe_Bay_AK.jpg?itok=s2TACtf-" width="50%" style="border: solid 2px black;"/>
 
 ---
