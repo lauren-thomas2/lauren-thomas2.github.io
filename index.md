@@ -26,6 +26,8 @@ University of Colorado Boulder, 2026
 Connectivity and Fluxes in Arctic Deltas\
 <img src="https://d9-wret.s3.us-west-2.amazonaws.com/assets/palladium/production/s3fs-public/styles/full_width/public/media/images/L9_073011_20220701_B543_Prudhoe_Bay_AK.jpg?itok=s2TACtf-" width="50%" style="border: solid 2px black;"/>
 
+<img src="https://natureconservancy-h.assetsadobe.com/is/image/content/dam/tnc/nature/en/photos/t/n/tnc_89147553.jpg" width="50%" style="border: solid 2px black;"/> <img src="https://d9-wret.s3.us-west-2.amazonaws.com/assets/palladium/production/s3fs-public/styles/full_width/public/media/images/L9_073011_20220701_B543_Prudhoe_Bay_AK.jpg?itok=s2TACtf-" width="50%" style="border: solid 2px black;"/>
+
 ---
 
 ### Previous Research Contributions:
