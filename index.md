@@ -37,7 +37,7 @@ University of Colorado Boulder, 2026
 ### GEOG5463 Portfolio
 
 #### My First Map
-Here is a map of the **Rum River, MN** where I completed my most recent fieldwork. We chose the Rum River as a study site because it has a gradient of human impacts within the floodplain, making it an ideal location to assess changes in floodplain organic carbon stocks in the Midwest U.S.
+Here is a map of a segment of the **Rum River, MN** where I completed my most recent fieldwork. We chose the Rum River as a study site because it has a gradient of human impacts within the floodplain, making it an ideal location to assess changes in floodplain organic carbon stocks in the Midwest U.S.
 
 <embed type="text/html" src="img/rumriver.html" width="600" height="600">
 
