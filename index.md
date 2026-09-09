@@ -25,18 +25,12 @@ University of Colorado Boulder, 2026
 
 ---
 
-### Previous Research Contributions:
-[Drivers of Global Tree Loss](https://doi.org/10.1126/science.adz9042)\
-<img src="/img/Global_Tree_Loss.png?raw=true" width="50%" style="border: solid 2px black;"/>
+### Previous Projects:
+[Drivers of Global Tree Loss](https://doi.org/10.1126/science.adz9042)&emsp;[ML Snow Depth Predictions](https://doi.org/10.5194/tc-19-393-2025)\
+<img src="/img/Global_Tree_Loss.png?raw=true" width="45%" style="border: solid 2px black;" hspace="7"/> <img src="/img/Arctic_Snow.JPG?raw=true" width="45%" style="border: solid 2px black;" hspace="10"/>
 
-[ML Predictions of Continuous Snow Depths](https://doi.org/10.5194/tc-19-393-2025)\
-<img src="/img/Arctic_Snow.JPG?raw=true" width="50%" style="border: solid 2px black;"/>
-
-[Vegetation Influences Subarctic Snowpacks](https://doi.org/10.1002/ppp.2263)\
-<img src="/img/Shrub_PF_Interactions.png?raw=true" width="50%" style="border: solid 2px black;"/>
-
-[Developing Methods for Arctic Rainfall Simulations](https://doi.org/10.2166/nh.2023.146)\
-<img src="https://ars.els-cdn.com/content/image/1-s2.0-S1998956326003861-hydrology-d-23-00146gf01.jpg" width="50%" style="border: solid 2px black;"/>
+[Vegetation & Subarctic Snowpacks](https://doi.org/10.1002/ppp.2263)&emsp;[Arctic Rainfall Simulations](https://doi.org/10.2166/nh.2023.146)\
+<img src="/img/Shrub_PF_Interactions.png?raw=true" width="45%" style="border: solid 2px black;" hspace="7"/> <img src="https://ars.els-cdn.com/content/image/1-s2.0-S1998956326003861-hydrology-d-23-00146gf01.jpg" width="45%" style="border: solid 2px black;" hspace="10"/>
 
 ---
 
