@@ -26,10 +26,10 @@ Investigating the Effects of Human Alteration on Floodplain Carbon Storage
 
 ### Education
 **B.S. Environmental Science**
-**University of Maryland 2021**
+University of Maryland 2021
 
 **B.A. Criminology & Criminal Justice**
-**University of Maryland 2021**
+University of Maryland 2021
 
 **M.A. Geography**
-**University of Colorado Boulder 2026**
+University of Colorado Boulder 2026
