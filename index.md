@@ -18,11 +18,11 @@ Investigating the Effects of Human Alteration on Floodplain Carbon Storage
 ### Check out some of my previous research contributions:
 [Drivers of Global Tree Loss](https://doi.org/10.1126/science.adz9042)
 
-<img src="/img/Global_Tree_Loss.png?raw=true" width="50%" style="border: 2px black;"/>
+<img src="/img/Global_Tree_Loss.png?raw=true" width="50%" style="border: solid 3px black;"/>
 
 [Vegetation Influences Subarctic Snowpack](https://doi.org/10.1002/ppp.2263)
 
-<img src="/img/Shrub_PF_Interactions.png?raw=true" width="50%"/>
+<img src="/img/Shrub_PF_Interactions.png?raw=true" width="50%" style="border: solid 3px black;"/>
 
 ### Education
 #### **B.S. Environmental Science**
