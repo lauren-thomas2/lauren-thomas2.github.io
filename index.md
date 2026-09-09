@@ -11,17 +11,17 @@ My research primarily focuses on combining field work and geospatial analyses to
 Check out some of my previous research contributions:
 Global Tree Loss       | Vegetation Influences Subarctic Snowpack
 :---------------------------:|:----------------------------------------:
-![<img src="/img/Global_Tree_Loss.png">](https://doi.org/10.1126/science.adz9042)|![<img src="/img/Shrub_PF_Interactions.png">](https://doi.org/10.1002/ppp.2263)
+![<img src="/img/Global_Tree_Loss.png">](https://doi.org/10.1126/science.adz9042) | ![<img src="/img/Shrub_PF_Interactions.png">](https://doi.org/10.1002/ppp.2263)
 
 #### Education
 ##### B.S. Environmental Science - 2021
-###### University of Maryland
+University of Maryland
 
 ##### B.A. Criminology & Criminal Justice - 2021
-###### University of Maryland
+University of Maryland
 
 ##### M.A. Geography - 2026
-###### University of Colorado Boulder
+University of Colorado Boulder
 
 #### Contact Information
 * Email: Lauren.thomas-2@colorado.edu
