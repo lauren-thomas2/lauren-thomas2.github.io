@@ -29,15 +29,15 @@ University of Colorado Boulder, 2026
 &emsp;&emsp;[Drivers of Global Tree Loss](https://doi.org/10.1126/science.adz9042)&emsp;&emsp;&emsp;&emsp;[ML Snow Depth Predictions](https://doi.org/10.5194/tc-19-393-2025)\
 <img src="/img/Global_Tree_Loss.jpg?raw=true" width="45%" style="border: solid 1px black;" hspace="7"/> <img src="/img/Arctic_Snow.JPG?raw=true" width="45%" style="border: solid 1px black;" hspace="10"/>
 
-[Vegetation & Subarctic Snowpacks](https://doi.org/10.1002/ppp.2263)&emsp;&emsp;&emsp;&emsp;[Arctic Rainfall Simulations](https://doi.org/10.2166/nh.2023.146)\
-&emsp;<img src="/img/Snow_Veg.JPG?raw=true" width="45%" style="border: solid 1px black;" hspace="7"/> <img src="/img/Arctic_RFS.jpg?raw=true" width="45%" style="border: solid 1px black;" hspace="10"/>
+&emsp;[Vegetation & Subarctic Snowpacks](https://doi.org/10.1002/ppp.2263)&emsp;&emsp;&emsp;&emsp;[Arctic Rainfall Simulations](https://doi.org/10.2166/nh.2023.146)\
+<img src="/img/Snow_Veg.JPG?raw=true" width="45%" style="border: solid 1px black;" hspace="7"/> <img src="/img/Arctic_RFS.jpg?raw=true" width="45%" style="border: solid 1px black;" hspace="10"/>
 
 ---
 
 ### GEOG5463 Portfolio
 
 #### My First Map
-Here is a map of a segment of the **Rum River, MN** where I completed my most recent fieldwork. We chose the Rum River as a study site because it has a gradient of human impacts within the floodplain, making it an ideal location to assess changes in floodplain organic carbon stocks in the Midwest U.S.
+Here is a map of a segment of the **Rum River, MN** where I completed my most recent fieldwork. We chose the Rum River as a study site because its floodplain has been altered by a gradient of human impacts, making it an ideal location to assess changes in floodplain organic carbon stocks in the Midwest U.S.
 
 <embed type="text/html" src="img/rumriver.html" width="600" height="600">
 
