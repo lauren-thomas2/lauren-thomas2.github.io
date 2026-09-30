@@ -38,5 +38,5 @@ University of Colorado Boulder, 2026
 
 #### [Interactive Map: Reseearch on the Rum River, MN](https://lauren-thomas2.github.io/interactive_map/)
 
-#### [Climate Change: Temperature Trends in SE Arizona](https://lauren-thomas2.github.io/climate_change/)
+#### [Climate Change: Temperature Trends in SE Arizona](climate-change.html)
 
