@@ -36,10 +36,7 @@ University of Colorado Boulder, 2026
 
 ### GEOG5463 Portfolio
 
-#### My First Map
-Here is a map of a segment of the **Rum River, Minnesota** where I completed my most recent fieldwork. We chose the Rum River as a study site because its floodplain has been altered by a gradient of human impacts, making it an ideal location to assess changes in floodplain organic carbon stocks in the Midwest U.S.
-
-<embed type="text/html" src="img/rumriver.html" width="600" height="600">
+#### [Interactive Map: Reseearch on the Rum River, MN](https://lauren-thomas2.github.io/interactive_map/)
 
 #### [Climate Change: Temperature Trends in SE Arizona](https://lauren-thomas2.github.io/climate_change/)
 
