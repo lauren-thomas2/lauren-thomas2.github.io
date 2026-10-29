@@ -40,4 +40,4 @@ University of Colorado Boulder, 2026
 
 #### [Climate Change: Temperature Trends in SE Arizona](portfolio/climate-change)
 
-#### [Migration](portfolio/migration)
+#### [Arctic Tern Migration](portfolio/migration)
