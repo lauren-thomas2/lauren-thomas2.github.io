@@ -7800,11 +7800,14 @@ a.anchor-link {
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h1 id="Arctic-Tern-Migration">Arctic Tern Migration<a class="anchor-link" href="#Arctic-Tern-Migration">¶</a></h1><p>Arctic Tern (Sterna paradisaea) are a species of seabird and are known to have one of the longest migrations in the world, as they travel from the Arctic to the Antarctic every year. Arctic Tern are affected by the impacts of climate change (Morten et al., 2023). These birds are also culturally significant for indigenous communities, as their eggs are important for subsistence harvesting.</p>
-<h2 id="Research-question">Research question<a class="anchor-link" href="#Research-question">¶</a></h2><blockquote>
-<p>Given that the Arctic is experiencing the effects of climate change at a much faster rate than the rest of the world, where do Arctic Tern spend most of the year and when do they migrate? How much of their year is actually spent at the poles versus actively migrating.</p>
-</blockquote>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h1 id="Arctic-Tern-Migration">Arctic Tern Migration<a class="anchor-link" href="#Arctic-Tern-Migration">¶</a></h1><p>Arctic Tern (Sterna paradisaea) are a species of seabird and are known to have one of the longest migrations in the world because they travel between the Arctic and Antarctic every year (Alerstam et al., 2019). Arctic Tern are affected by the impacts of climate change (Morten et al., 2023). These birds are also culturally significant for indigenous communities, as their eggs are important for subsistence harvesting (Henri et al., 2020).</p>
+<h2 id="Research-Questions">Research Questions<a class="anchor-link" href="#Research-Questions">¶</a></h2><p>Where do Arctic Tern spend most of the year and when do they migrate? How much of their year is actually spent at the poles versus actively migrating?</p>
+<h2 id="Data">Data<a class="anchor-link" href="#Data">¶</a></h2><p>The data that I use for this analysis comes from the following publicly available datasets.
+<strong>Species Occurrence Data:</strong> The species data I'm using comes from the Global Biodiversity Information Facility (GBIF) website (<a href="https://www.gbif.org/taxon/6ZSDC">https://www.gbif.org/taxon/6ZSDC</a>), which reports geospatial species occurrence data. Specifically, I'm using Arctic Tern data from 2020. I'm only using one year of data in order to limit the size of the dataset, as this one year of data contains thousands of data points. This data was retrieved as a csv.
+<strong>Ecoregion Data:</strong> The Ecoregion data I use here comes from Resolve's 2017 mapping of the Ecoregions of the World (<a href="https://www.resolve.ngo/projects/ecoregions-world">https://www.resolve.ngo/projects/ecoregions-world</a>). This data is a shapefile.</p>
+<h2 id="Methods">Methods<a class="anchor-link" href="#Methods">¶</a></h2><p>In the code below, I'll import the datasets and combine them into a single geodataframe where the species occurrence data is paired with the ecoregion data. I'll normalize the occurrence data to account for any biases that may exist in observations due to seasonal variability in observational data and population distribution (of observers). Then, I'll plot the data in a scatterplot and in an interactive map.</p>
 </div>
 </div>
 </div>
@@ -7813,17 +7816,58 @@ a.anchor-link {
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Load-required-libraries">Load required libraries<a class="anchor-link" href="#Load-required-libraries">¶</a></h2>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Code">Code<a class="anchor-link" href="#Code">¶</a></h2><h3 id="Load-required-libraries">Load required libraries<a class="anchor-link" href="#Load-required-libraries">¶</a></h3>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noInput" id="cell-id=fc1d6c1d">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=fc1d6c1d">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [10]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1">### load libraries</span>
+
+<span class="c1">### folder/file management</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pathlib</span>
+
+<span class="c1">### tabular data</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="c1">### handle geospatial vector data</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">geopandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gpd</span>
+
+<span class="c1">### access prepped gbif data</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">earthpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">et</span>
+
+<span class="c1">### libraries for dynamic mapping</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">cartopy.crs</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ccrs</span>
+
+<span class="c1">### customize the dynamic plot</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">panel</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pn</span>
+
+<span class="c1">### make dynamic plot with geodataframe</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">hvplot.pandas</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">holoviews</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">hv</span>
+
+<span class="c1">### get month names</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">calendar</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
 <div class="jp-Cell-outputWrapper">
 <div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
 <script type="esms-options">{"shimMode": true}</script><style>*[data-root-id],
 *[data-root-id] > * {
@@ -7844,9 +7888,10 @@ a.anchor-link {
 </div>
 </div>
 <div class="jp-OutputArea-child">
-<div class="jp-RenderedJavaScript jp-OutputArea-output" data-mime-type="application/javascript" id="e830511e-fd30-43b0-8e64-60852056aedb" tabindex="0">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedJavaScript jp-OutputArea-output" data-mime-type="application/javascript" id="a07bddf7-249c-4b47-b72e-42fc4ee30063" tabindex="0">
 <script type="text/javascript">
-var element = document.getElementById('e830511e-fd30-43b0-8e64-60852056aedb');
+var element = document.getElementById('a07bddf7-249c-4b47-b72e-42fc4ee30063');
 (function(root) {
   function now() {
     return new Date();
@@ -8018,7 +8063,7 @@ var element = document.getElementById('e830511e-fd30-43b0-8e64-60852056aedb');
     document.body.appendChild(element);
   }
 
-  const js_urls = ["https://cdn.holoviz.org/panel/1.9.4/dist/bundled/reactiveesm/es-module-shims@^1.10.0/dist/es-module-shims.min.js", "https://cdn.bokeh.org/bokeh/release/bokeh-3.9.2.min.js", "https://cdn.bokeh.org/bokeh/release/bokeh-gl-3.9.2.min.js", "https://cdn.bokeh.org/bokeh/release/bokeh-widgets-3.9.2.min.js", "https://cdn.bokeh.org/bokeh/release/bokeh-tables-3.9.2.min.js", "https://cdn.holoviz.org/panel/1.9.4/dist/panel.min.js"];
+  const js_urls = ["https://cdn.holoviz.org/panel/1.9.4/dist/bundled/reactiveesm/es-module-shims@^1.10.0/dist/es-module-shims.min.js", "https://cdn.bokeh.org/bokeh/release/bokeh-3.9.2.min.js", "https://cdn.bokeh.org/bokeh/release/bokeh-gl-3.9.2.min.js", "https://cdn.bokeh.org/bokeh/release/bokeh-widgets-3.9.2.min.js", "https://cdn.bokeh.org/bokeh/release/bokeh-tables-3.9.2.min.js", "https://cdn.holoviz.org/panel/1.9.4/dist/panel.min.js", "https://cdn.jsdelivr.net/npm/@holoviz/geoviews@1.15.1/dist/geoviews.min.js"];
   const js_modules = [];
   const js_exports = {};
   const css_urls = [];
@@ -8102,9 +8147,10 @@ function(Bokeh) {} // ensure no trailing comma for IE
 </div>
 </div>
 <div class="jp-OutputArea-child">
-<div class="jp-RenderedJavaScript jp-OutputArea-output" data-mime-type="application/javascript" id="a42f580c-56af-4729-afa8-f87118301789" tabindex="0">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedJavaScript jp-OutputArea-output" data-mime-type="application/javascript" id="3215bc12-2fe6-4bb2-a674-40b1f2543954" tabindex="0">
 <script type="text/javascript">
-var element = document.getElementById('a42f580c-56af-4729-afa8-f87118301789');
+var element = document.getElementById('3215bc12-2fe6-4bb2-a674-40b1f2543954');
 
 if ((window.PyViz === undefined) || (window.PyViz instanceof HTMLElement)) {
   window.PyViz = {comms: {}, comm_status:{}, kernels:{}, receivers: {}, plot_index: []}
@@ -8363,13 +8409,14 @@ if (window.Jupyter !== undefined) {
 </div>
 </div>
 <div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
-<div id="p1011">
-<div data-root-id="p1011" id="e52e72d8-b040-4217-8d31-b38bbc16829a" style="display: contents;"></div>
+<div id="6ec0da17-2e78-4647-a7b0-f7d9dc8cc587">
+<div data-root-id="6ec0da17-2e78-4647-a7b0-f7d9dc8cc587" id="b683dc93-75be-404f-826b-ec3c94588f50" style="display: contents;"></div>
 </div>
 <script type="application/javascript">(function(root) {
-  var docs_json = {"b32e1bdb-cfd0-4075-91e2-a524e9fd2e2f":{"version":"3.9.2","title":"Bokeh Application","config":{"type":"object","name":"DocumentConfig","id":"p1009","attributes":{"notifications":{"type":"object","name":"Notifications","id":"p1010"}}},"roots":[{"type":"object","name":"panel.models.browser.BrowserInfo","id":"p1011"},{"type":"object","name":"panel.models.comm_manager.CommManager","id":"p1012","attributes":{"plot_id":"p1011","comm_id":"28a841d671904351aefb74803b684e5a","client_comm_id":"24e0d1affda14b7182168a15863a1423"}}],"defs":[{"type":"model","name":"ReactiveHTML1"},{"type":"model","name":"FlexBox1","properties":[{"name":"align_content","kind":"Any","default":"flex-start"},{"name":"align_items","kind":"Any","default":"flex-start"},{"name":"flex_direction","kind":"Any","default":"row"},{"name":"flex_wrap","kind":"Any","default":"wrap"},{"name":"gap","kind":"Any","default":""},{"name":"justify_content","kind":"Any","default":"flex-start"}]},{"type":"model","name":"FloatPanel1","properties":[{"name":"config","kind":"Any","default":{"type":"map"}},{"name":"contained","kind":"Any","default":true},{"name":"position","kind":"Any","default":"right-top"},{"name":"offsetx","kind":"Any","default":null},{"name":"offsety","kind":"Any","default":null},{"name":"theme","kind":"Any","default":"primary"},{"name":"status","kind":"Any","default":"normalized"}]},{"type":"model","name":"GridStack1","properties":[{"name":"ncols","kind":"Any","default":null},{"name":"nrows","kind":"Any","default":null},{"name":"allow_resize","kind":"Any","default":true},{"name":"allow_drag","kind":"Any","default":true},{"name":"state","kind":"Any","default":[]}]},{"type":"model","name":"drag1","properties":[{"name":"slider_width","kind":"Any","default":5},{"name":"slider_color","kind":"Any","default":"black"},{"name":"start","kind":"Any","default":0},{"name":"end","kind":"Any","default":100},{"name":"value","kind":"Any","default":50}]},{"type":"model","name":"click1","properties":[{"name":"terminal_output","kind":"Any","default":""},{"name":"debug_name","kind":"Any","default":""},{"name":"clears","kind":"Any","default":0}]},{"type":"model","name":"ReactiveESM1","properties":[{"name":"esm_constants","kind":"Any","default":{"type":"map"}}]},{"type":"model","name":"JSComponent1","properties":[{"name":"esm_constants","kind":"Any","default":{"type":"map"}}]},{"type":"model","name":"ReactComponent1","properties":[{"name":"use_shadow_dom","kind":"Any","default":true},{"name":"esm_constants","kind":"Any","default":{"type":"map"}}]},{"type":"model","name":"AnyWidgetComponent1","properties":[{"name":"use_shadow_dom","kind":"Any","default":true},{"name":"esm_constants","kind":"Any","default":{"type":"map"}}]},{"type":"model","name":"FastWrapper1","properties":[{"name":"object","kind":"Any","default":null},{"name":"style","kind":"Any","default":null}]},{"type":"model","name":"NotificationArea1","properties":[{"name":"js_events","kind":"Any","default":{"type":"map"}},{"name":"max_notifications","kind":"Any","default":5},{"name":"notifications","kind":"Any","default":[]},{"name":"position","kind":"Any","default":"bottom-right"},{"name":"_clear","kind":"Any","default":0},{"name":"types","kind":"Any","default":[{"type":"map","entries":[["type","warning"],["background","#ffc107"],["icon",{"type":"map","entries":[["className","fas fa-exclamation-triangle"],["tagName","i"],["color","white"]]}]]},{"type":"map","entries":[["type","info"],["background","#007bff"],["icon",{"type":"map","entries":[["className","fas fa-info-circle"],["tagName","i"],["color","white"]]}]]}]}]},{"type":"model","name":"Notification","properties":[{"name":"background","kind":"Any","default":null},{"name":"duration","kind":"Any","default":3000},{"name":"icon","kind":"Any","default":null},{"name":"message","kind":"Any","default":""},{"name":"notification_type","kind":"Any","default":null},{"name":"_rendered","kind":"Any","default":false},{"name":"_destroyed","kind":"Any","default":false}]},{"type":"model","name":"TemplateActions1","properties":[{"name":"open_modal","kind":"Any","default":0},{"name":"close_modal","kind":"Any","default":0}]},{"type":"model","name":"BootstrapTemplateActions1","properties":[{"name":"open_modal","kind":"Any","default":0},{"name":"close_modal","kind":"Any","default":0}]},{"type":"model","name":"TemplateEditor1","properties":[{"name":"layout","kind":"Any","default":[]}]},{"type":"model","name":"MaterialTemplateActions1","properties":[{"name":"open_modal","kind":"Any","default":0},{"name":"close_modal","kind":"Any","default":0}]},{"type":"model","name":"request_value1","properties":[{"name":"fill","kind":"Any","default":"none"},{"name":"_synced","kind":"Any","default":null},{"name":"_request_sync","kind":"Any","default":0}]}]}};
-  var render_items = [{"docid":"b32e1bdb-cfd0-4075-91e2-a524e9fd2e2f","roots":{"p1011":"e52e72d8-b040-4217-8d31-b38bbc16829a"},"root_ids":["p1011"]}];
+  var docs_json = {"eb4c2cb9-523b-4f54-9515-c0cc15552acb":{"version":"3.9.2","title":"Bokeh Application","config":{"type":"object","name":"DocumentConfig","id":"65bb1172-b9dc-43d0-989c-6571b85cb927","attributes":{"notifications":{"type":"object","name":"Notifications","id":"23db6b58-22a8-413c-8a64-5c622b21660a"}}},"roots":[{"type":"object","name":"panel.models.browser.BrowserInfo","id":"6ec0da17-2e78-4647-a7b0-f7d9dc8cc587"},{"type":"object","name":"panel.models.comm_manager.CommManager","id":"1d73669e-1eab-44aa-b182-0fac2bee0b3a","attributes":{"plot_id":"6ec0da17-2e78-4647-a7b0-f7d9dc8cc587","comm_id":"05c375d8482a4c12b0d8fe96cd87efde","client_comm_id":"f41e925f7ae84bb59667816da51ef415"}}],"defs":[{"type":"model","name":"ReactiveHTML1"},{"type":"model","name":"FlexBox1","properties":[{"name":"align_content","kind":"Any","default":"flex-start"},{"name":"align_items","kind":"Any","default":"flex-start"},{"name":"flex_direction","kind":"Any","default":"row"},{"name":"flex_wrap","kind":"Any","default":"wrap"},{"name":"gap","kind":"Any","default":""},{"name":"justify_content","kind":"Any","default":"flex-start"}]},{"type":"model","name":"FloatPanel1","properties":[{"name":"config","kind":"Any","default":{"type":"map"}},{"name":"contained","kind":"Any","default":true},{"name":"position","kind":"Any","default":"right-top"},{"name":"offsetx","kind":"Any","default":null},{"name":"offsety","kind":"Any","default":null},{"name":"theme","kind":"Any","default":"primary"},{"name":"status","kind":"Any","default":"normalized"}]},{"type":"model","name":"GridStack1","properties":[{"name":"ncols","kind":"Any","default":null},{"name":"nrows","kind":"Any","default":null},{"name":"allow_resize","kind":"Any","default":true},{"name":"allow_drag","kind":"Any","default":true},{"name":"state","kind":"Any","default":[]}]},{"type":"model","name":"drag1","properties":[{"name":"slider_width","kind":"Any","default":5},{"name":"slider_color","kind":"Any","default":"black"},{"name":"start","kind":"Any","default":0},{"name":"end","kind":"Any","default":100},{"name":"value","kind":"Any","default":50}]},{"type":"model","name":"click1","properties":[{"name":"terminal_output","kind":"Any","default":""},{"name":"debug_name","kind":"Any","default":""},{"name":"clears","kind":"Any","default":0}]},{"type":"model","name":"ReactiveESM1","properties":[{"name":"esm_constants","kind":"Any","default":{"type":"map"}}]},{"type":"model","name":"JSComponent1","properties":[{"name":"esm_constants","kind":"Any","default":{"type":"map"}}]},{"type":"model","name":"ReactComponent1","properties":[{"name":"use_shadow_dom","kind":"Any","default":true},{"name":"esm_constants","kind":"Any","default":{"type":"map"}}]},{"type":"model","name":"AnyWidgetComponent1","properties":[{"name":"use_shadow_dom","kind":"Any","default":true},{"name":"esm_constants","kind":"Any","default":{"type":"map"}}]},{"type":"model","name":"FastWrapper1","properties":[{"name":"object","kind":"Any","default":null},{"name":"style","kind":"Any","default":null}]},{"type":"model","name":"NotificationArea1","properties":[{"name":"js_events","kind":"Any","default":{"type":"map"}},{"name":"max_notifications","kind":"Any","default":5},{"name":"notifications","kind":"Any","default":[]},{"name":"position","kind":"Any","default":"bottom-right"},{"name":"_clear","kind":"Any","default":0},{"name":"types","kind":"Any","default":[{"type":"map","entries":[["type","warning"],["background","#ffc107"],["icon",{"type":"map","entries":[["className","fas fa-exclamation-triangle"],["tagName","i"],["color","white"]]}]]},{"type":"map","entries":[["type","info"],["background","#007bff"],["icon",{"type":"map","entries":[["className","fas fa-info-circle"],["tagName","i"],["color","white"]]}]]}]}]},{"type":"model","name":"Notification","properties":[{"name":"background","kind":"Any","default":null},{"name":"duration","kind":"Any","default":3000},{"name":"icon","kind":"Any","default":null},{"name":"message","kind":"Any","default":""},{"name":"notification_type","kind":"Any","default":null},{"name":"_rendered","kind":"Any","default":false},{"name":"_destroyed","kind":"Any","default":false}]},{"type":"model","name":"TemplateActions1","properties":[{"name":"open_modal","kind":"Any","default":0},{"name":"close_modal","kind":"Any","default":0}]},{"type":"model","name":"BootstrapTemplateActions1","properties":[{"name":"open_modal","kind":"Any","default":0},{"name":"close_modal","kind":"Any","default":0}]},{"type":"model","name":"TemplateEditor1","properties":[{"name":"layout","kind":"Any","default":[]}]},{"type":"model","name":"MaterialTemplateActions1","properties":[{"name":"open_modal","kind":"Any","default":0},{"name":"close_modal","kind":"Any","default":0}]},{"type":"model","name":"request_value1","properties":[{"name":"fill","kind":"Any","default":"none"},{"name":"_synced","kind":"Any","default":null},{"name":"_request_sync","kind":"Any","default":0}]}]}};
+  var render_items = [{"docid":"eb4c2cb9-523b-4f54-9515-c0cc15552acb","roots":{"6ec0da17-2e78-4647-a7b0-f7d9dc8cc587":"b683dc93-75be-404f-826b-ec3c94588f50"},"root_ids":["6ec0da17-2e78-4647-a7b0-f7d9dc8cc587"]}];
   var docs = Object.values(docs_json)
   if (!docs) {
     return
@@ -8443,50 +8490,239 @@ if (window.Jupyter !== undefined) {
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Create-directory-for-data">Create directory for data<a class="anchor-link" href="#Create-directory-for-data">¶</a></h2>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Create-directory-for-data">Create directory for data<a class="anchor-link" href="#Create-directory-for-data">¶</a></h3>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs jp-mod-noInput" id="cell-id=b88b9c7f">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=b88b9c7f">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [11]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1">### designate your data directory</span>
+<span class="n">data_dir</span> <span class="o">=</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="s2">"D:\LThomas\earth-data-analytics\data"</span><span class="p">)</span>
+
+<span class="c1">### make the path</span>
+<span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="n">exist_ok</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
 </div>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=4a17a0e8">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Download-and-plot-ecoregions">Download and plot ecoregions<a class="anchor-link" href="#Download-and-plot-ecoregions">¶</a></h2>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Download-and-plot-ecoregions">Download and plot ecoregions<a class="anchor-link" href="#Download-and-plot-ecoregions">¶</a></h3>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs jp-mod-noInput" id="cell-id=7d3aebd2">
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=48b85600">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=7d3aebd2">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Load-GBIF-data">Load GBIF data<a class="anchor-link" href="#Load-GBIF-data">¶</a></h2><p><strong>Species Occurrence Data:</strong> The data we're using comes from the Global Biodiversity Information Facility (GBIF) website (<a href="https://www.gbif.org/taxon/6ZSDC">https://www.gbif.org/taxon/6ZSDC</a>), which reports geospatial species occurrence data. Specifically, we're using Arctic Tern data from 2020.
-<strong>Ecoregion Data:</strong></p>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [12]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1">### get url for ecoregions</span>
+<span class="n">ecoreg_url</span> <span class="o">=</span> <span class="p">(</span><span class="s2">"https://storage.googleapis.com/"</span>
+       <span class="s2">"teow2016/Ecoregions2017.zip"</span><span class="p">)</span>
+
+<span class="c1">### name the ecoregions directory name and file name</span>
+<span class="n">ecoreg_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="s2">"ecoregions"</span><span class="p">)</span>
+
+<span class="c1">### make the ecoregions directory</span>
+<span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">ecoreg_dir</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+
+<span class="c1">### join ecoregions shapefile path</span>
+<span class="n">ecoreg_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">ecoreg_dir</span><span class="p">,</span> <span class="s2">"ecoregions.shp"</span><span class="p">)</span>
+
+<span class="c1">### download the data once</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">ecoreg_path</span><span class="p">):</span>
+
+    <span class="c1">### open file at url</span>
+    <span class="n">ecoreg_gdf</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">ecoreg_url</span><span class="p">)</span>
+
+    <span class="c1">### save it to the filepath we've defined</span>
+    <span class="n">ecoreg_gdf</span><span class="o">.</span><span class="n">to_file</span><span class="p">(</span><span class="n">ecoreg_path</span><span class="p">)</span>
+
+<span class="c1">### open up the ecoregions boundaries</span>
+<span class="n">ecoreg_gdf</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">ecoreg_path</span><span class="p">)</span>
+</pre></div>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs jp-mod-noInput" id="cell-id=564a7fef">
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs jp-mod-noInput" id="cell-id=8d702e8a">
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs jp-mod-noInput" id="cell-id=4ed1b668">
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs jp-mod-noInput" id="cell-id=3725b766">
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs jp-mod-noInput" id="cell-id=ad550c7c">
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noInput" id="cell-id=3e9a0b68">
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=f050c28a">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Load-and-Wrangle-the-GBIF-and-Ecoregion-data">Load and Wrangle the GBIF and Ecoregion data<a class="anchor-link" href="#Load-and-Wrangle-the-GBIF-and-Ecoregion-data">¶</a></h3>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=564a7fef">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [13]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1">### load the GBIF data</span>
+<span class="n">gbif_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span>
+    <span class="s2">"D:/LThomas/earth-data-analytics/data/gbif/arctic-tern-2020.csv"</span><span class="p">,</span> 
+
+    <span class="c1">### csv delimeter isn't always a comma, in this case it's a tab</span>
+    <span class="n">delimiter</span> <span class="o">=</span> <span class="s1">'</span><span class="se">\t</span><span class="s1">'</span><span class="p">,</span>
+
+    <span class="c1">### set unique identifier as index</span>
+    <span class="n">index_col</span> <span class="o">=</span> <span class="s1">'gbifID'</span><span class="p">,</span>
+
+    <span class="c1">### subset columns</span>
+    <span class="n">usecols</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'gbifID'</span><span class="p">,</span> <span class="s1">'decimalLatitude'</span><span class="p">,</span> <span class="s1">'decimalLongitude'</span><span class="p">,</span> <span class="s1">'month'</span><span class="p">]</span>
+<span class="p">)</span>
+
+<span class="c1">### convert the dataframe to a geodataframe</span>
+<span class="n">gbif_gdf</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">(</span>
+        <span class="n">gbif_df</span><span class="p">,</span> 
+
+        <span class="c1">### set geometry for geodataframe from lat/lon of GBIF record</span>
+        <span class="n">geometry</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">points_from_xy</span><span class="p">(</span>
+            <span class="n">gbif_df</span><span class="o">.</span><span class="n">decimalLongitude</span><span class="p">,</span> 
+            <span class="n">gbif_df</span><span class="o">.</span><span class="n">decimalLatitude</span><span class="p">),</span> 
+
+        <span class="c1">### set the coordinate reference system</span>
+        <span class="n">crs</span><span class="o">=</span><span class="s2">"EPSG:4326"</span><span class="p">)</span>
+    
+    <span class="c1">### select the desired columns</span>
+    <span class="p">[[</span><span class="s1">'month'</span><span class="p">,</span> <span class="s1">'geometry'</span><span class="p">]]</span>
+<span class="p">)</span>
+
+<span class="c1">### join the gbif observations to the ecoregion polygons</span>
+<span class="n">gbif_ecoregion_gdf</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">ecoreg_gdf</span>
+    
+    <span class="c1">### match the CRS of the gbif data and the ecoregions</span>
+    <span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="n">gbif_gdf</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span>
+
+    <span class="c1">### find ecoregion for each observation</span>
+    <span class="o">.</span><span class="n">sjoin</span><span class="p">(</span>
+        <span class="n">gbif_gdf</span><span class="p">,</span>
+
+        <span class="c1">### type of database join</span>
+        <span class="n">how</span> <span class="o">=</span> <span class="s1">'inner'</span><span class="p">,</span>
+
+        <span class="c1">### keep all points that are contained </span>
+        <span class="n">predicate</span> <span class="o">=</span> <span class="s1">'contains'</span><span class="p">)</span>
+
+    <span class="c1">### any additional manipulations you want to do </span>
+    <span class="p">[[</span><span class="s1">'OBJECTID'</span><span class="p">,</span> <span class="s1">'month'</span><span class="p">]]</span>
+    
+    <span class="c1">### (renaming columns, etc)</span>
+    <span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'OBJECTID'</span> <span class="p">:</span> <span class="s1">'ecoregion'</span><span class="p">})</span>
+<span class="p">)</span>
+
+<span class="c1">### summarize the occurrences by ecoregion/month combination</span>
+<span class="n">occurrence_df</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">gbif_ecoregion_gdf</span>
+
+    <span class="c1">### group by each ecoregion and month </span>
+    <span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">'ecoregion'</span><span class="p">,</span> <span class="s1">'month'</span><span class="p">])</span>
+
+    <span class="c1">### and count the number of occurrences</span>
+    <span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="n">occurrences</span><span class="o">=</span><span class="p">(</span><span class="s1">'ecoregion'</span><span class="p">,</span> <span class="s1">'count'</span><span class="p">))</span>
+<span class="p">)</span>
+
+<span class="c1">### get rid of rare observations (which are possibly misidentifications)</span>
+<span class="n">occurrence_df</span> <span class="o">=</span> <span class="n">occurrence_df</span><span class="p">[</span><span class="n">occurrence_df</span><span class="o">.</span><span class="n">occurrences</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">]</span>
+
+<span class="c1">### calculate the mean # observations by ecoregion</span>
+<span class="n">mean_occurrences_by_ecoregion</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">occurrence_df</span>
+    <span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">'ecoregion'</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="p">)</span>
+
+<span class="n">mean_occurrences_by_ecoregion</span>
+
+<span class="c1">### calculate the mean # observations by month</span>
+<span class="n">mean_occurrences_by_month</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">occurrence_df</span>
+    <span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">'month'</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="p">)</span>
+
+<span class="c1">### normalize by space and time for sampling effort</span>
+<span class="n">occurrence_df</span><span class="p">[</span><span class="s1">'norm_occurrences'</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">occurrence_df</span>
+    <span class="o">/</span> <span class="n">mean_occurrences_by_ecoregion</span>
+    <span class="o">/</span><span class="n">mean_occurrences_by_month</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=022bf859">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h3 id="Plot-the-Data">Plot the Data<a class="anchor-link" href="#Plot-the-Data">¶</a></h3>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=3e9a0b68">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [14]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1">### create a scatterplot</span>
+<span class="c1">### reset the index to make it easier to work with then plot</span>
+<span class="n">occurrence_df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="s1">'month'</span><span class="p">,</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="s1">'norm_occurrences'</span><span class="p">,</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="s1">'ecoregion'</span><span class="p">,</span>
+    <span class="n">ylabel</span> <span class="o">=</span> <span class="s1">'Normalized Occurrences'</span><span class="p">,</span>
+    <span class="n">xlabel</span> <span class="o">=</span> <span class="s1">'Month'</span><span class="p">,</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="s1">'Normalized Occurrences by Month and Ecoregion (2020)'</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
 <div class="jp-Cell-outputWrapper">
 <div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
+<div class="jp-OutputPrompt jp-OutputArea-prompt">Out[14]:</div>
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
 <pre>&lt;Axes: title={'center': 'Normalized Occurrences by Month and Ecoregion (2020)'}, xlabel='Month', ylabel='Normalized Occurrences'&gt;</pre>
 </div>
 </div>
 <div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedImage jp-OutputArea-output" tabindex="0">
 <img alt="No description has been provided for this image" class="" src="data:image/png;base64,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ux+JguXxmjVriiwJevfddw2+vr6GLl26GMaPH2+oX7++oUqVKoZ169aZlvn999/Ve7/55htD586dDaNGjTK0bdtWbfPhhx82BAUFqTvEDh06qHXUq1fP0KBBA8PFixcNixcvViUhMl/mSYmIdemJ3GXK3ZhMjz76qOH22283BAQEGG6++WZDTk5OoSVB1vPOnDljWpf5FB4erpa7cuWKWk7uEqZOnaruAvr162e47777DA0bNlT7ePjwYYu78T59+qi/8Y477jAMGzZMPTce46JKgmrVqqUmvV5f4DI33nijuruQUiPjvj3++ONq3+S1CRMmGHr37q2OoxxTe5e59dZbDY0bN863vdmzZ6t9lzthI/PPUT7be++919C1a1f1mpRUyV2RHC/Zhjw23jn99ttv6q5JSjPkGMqxlM9u3rx5Fp+vbO+rr75S7x85cqThtttuU3dmkydPzrd/sg+yTvke3XPPPer7IN/LJUuWmJaxZ7sHDhwwVKtWzdCsWTN1fGS/5fN99dVXC/3MjPv72Wefqd+FfN+HDh1q8PHxMdx9992G3NxctZz8L59t//79861jw4YNah0ff/xxkSUR8h1+5JFH1N9oTj5X+b4V9NudO3eu+puNvzv5rCMjIw0rVqwo9rHftWuX+jtl2cGDB5t+NytXrizRZ2gtLS3N4vco3y/5XlWtWtWwd+/eYu+vkfwOpeS7e/fuhnHjxhlat25tWL58uVNKguz5XhbnM5HvqpSQjBgxwtCxY0dVEie/68cee0z9rgcMGKC+2/KdlRLjo0ePmtaRnJysvh8hISHq/fI9ke/hG2+8ke+3/cwzz6hjZO7q1avquPr7+6v/5bcRGhpq6NGjh0Upx4MPPqhqF/744w9VwiL706pVK/W+v/76q8hj9t1336n92bJli13HWM6T8puVc7E5+Q23bNky3/LGa9O3337rsvXKb17OB2RbuQiCMjMz1QlGvrTGi6+tE6mc4GSeeRFhenq6oWfPnipouHTpksUXok2bNobTp0+rebKNpKQkdfGUIOqBBx4wXRxkvvxw5Ic1ZswYUyAjxdSyXrkgFUUCEfmhvf/++8UKgmyRYyLLyIXG6P/+7//UidW8eF+CEPnbW7RoYSpKNf59//77r2k5+UHHxMQUGQRduHBBLTN8+PBC9++JJ55Qy23dulU9f+mll2xWS8iFStZp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RG7C4IDWYbIOysMgiIiIyE1wFPkKVh320UcfoXHjxqhUqRJuvPFGbN26tdDlN2/ejDvvvBM1atRA7dq1MXr0aJw6dcpimUcffRT+/v4WU7t27Zz8lxAREZE7KdMg6Ouvv8YTTzyB//u//8P+/ftxww03oH///jh79qzN5XU6HaZOnYqRI0di27ZtWL16NS5fvoy+ffvi6tWrpuVycnIwaNAgXLlyxTRt2rTJhX8ZERGR81qHlXaiPCU6EnFxcZg5c6bp+RtvvKFKcqS05cSJE3avR953//3344477lAlO7NmzUJQUJAqHbLFy8tLBTPDhw9H9erV0aBBA7WsbFNKiMxptVqLkiBfX9+S/KlERETlrjqstBOVIgiS0pimTZuqx7GxsZgxY4YKaGTek08+adc6pATnwIED6N27t0XgIs//+ecfu/dFSnlEcHCwxfw///wTERERqFu3Lu69916cOXPG7nUSERFRxVeiIOivv/5Cnz591OM//vhDVT09+OCDqiRn/fr1dq0jPj5e/R8dHW0xX56fP3/ernVI9dhTTz2Fli1bon379qb5kiv02Wef4dChQ1i8eLEKgCTfKDU1tcB1ZWVlISUlxWIiIiIqj2OHlXaiUrQO02g0KkgIDQ3FypUrTQGRVFcZDIZirUtKf6yf27uOyZMnY/fu3diwYYPattG0adMsgqqffvpJVZ99//33mDhxos11SfXeSy+9VKx9JyIiciW2DisHJUES9IwdOxYvvPACli9fjqFDh6r5EoxIiYs9qlSpov5PSEiwmH/x4kXTa4WRFmCLFi3CqlWrVOuywki1WK1atXDkyJECl5HAKTk52TRJ3hMREVF5UtY5QYYiCinsKcQobmFJuQuCJBlZggoJer788kvExMSo+VLSIvlB9oiMjETDhg2xbt06iwMjz7t06VLoex977DEsWLBABUCtW7cucltSaiVVYlWrVi1wGT8/P1WyZT4RERF5OoPBgHfeeQf16tVT10pJP9m4caPFMsePH0e/fv3U65KjO2HCBKSnpxd7GbcIgqKiovDFF1+o3KARI0aY5ktg0qZNm2IlWM+bN081dZcm7hJAXbp0SeUXGU2aNMmijx9pUi/bkffY2pbk9owaNQp79uxRTeVPnjyp+hIKCAhQ/xMREbmrsigJevrpp1Xjp08//RSZmZn45ptv8PPPP5tez87O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"/>
 </div>
@@ -8498,21 +8734,67 @@ if (window.Jupyter !== undefined) {
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<blockquote>
-<p>This scatterplot shows us the normalized occurrences of Arctic Tern by month and ecoregion. We can see that at the start of the year, Arctic Tern are seen in 3 main ecoregions which are located near the poles. As the year goes on and we move towards summer in the northern hemisphere, we see Arctic Tern in a wider range of ecoregions in both polar and temperate regions, with low occurrences across ecoregions. Moving from June to October, we see a decrease in the number of ecoregions and an increase in the normalized occurrences in each of these ecoregions. From October to December, we see a gradual decrease in the number of ecoregions, with most occurrences shifting to polar regions, and the normalized occurrences in the few regions with Arctic Terns gradually increased as the number of ecoregions decreased.</p>
-</blockquote>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>This scatterplot shows us the normalized occurrences of Arctic Tern by month and ecoregion. We can see that at the start of the year, Arctic Tern are seen in 3 main ecoregions which are located near the poles. As the year goes on and we move towards summer in the northern hemisphere, we see Arctic Tern in a wider range of ecoregions in both polar and temperate regions, with low occurrences across these ecoregions. Moving from June to October, we see a decrease in the number of ecoregions and an increase in the normalized occurrences in each of these ecoregions. From October to December, we see a gradual decrease in the number of ecoregions, with most occurrences shifting to polar regions, and the normalized occurrences in the few regions with Arctic Terns gradually increased as the number of ecoregions decreased. Next, we'll create an interactive map to see what this looks like spatially.</p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs jp-mod-noInput" id="cell-id=34f41b80">
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs jp-mod-noInput" id="cell-id=286718d7">
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noInput" id="cell-id=5e765077">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=34f41b80">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [15]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1">### simplify the geometry to speed up processing</span>
+<span class="n">ecoreg_gdf</span><span class="o">.</span><span class="n">geometry</span> <span class="o">=</span> <span class="n">ecoreg_gdf</span><span class="o">.</span><span class="n">simplify</span><span class="p">(</span>
+
+    <span class="c1">### set tolerance level and don't preserve topology</span>
+    <span class="mf">0.05</span><span class="p">,</span> <span class="n">preserve_topology</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="p">)</span>
+
+<span class="c1">### change the CRS to Mercator for mapping</span>
+<span class="n">ecoreg_gdf</span> <span class="o">=</span> <span class="n">ecoreg_gdf</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="n">ccrs</span><span class="o">.</span><span class="n">Mercator</span><span class="p">())</span>
+
+<span class="c1">### prep the data, then combine the occurrence data with the ecoregions</span>
+
+<span class="c1">### rename columns in ecoregID to match occurrence_df</span>
+<span class="n">ecoreg_gdf</span> <span class="o">=</span> <span class="n">ecoreg_gdf</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'OBJECTID'</span><span class="p">:</span> <span class="s1">'ecoregion'</span><span class="p">})</span>
+
+<span class="c1">### make ecoreg ID the index for merge with occurrence_df</span>
+<span class="n">ecoreg_gdf</span> <span class="o">=</span> <span class="n">ecoreg_gdf</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">'ecoregion'</span><span class="p">)</span>
+
+<span class="c1">### join the occurrences with the plotting GeoDataFrame</span>
+<span class="n">occurrence_gdf</span> <span class="o">=</span> <span class="n">ecoreg_gdf</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">occurrence_df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=5e765077">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [16]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1">### activate panel and hvplot extensions you'll need for the interactive plot</span>
+<span class="n">pn</span><span class="o">.</span><span class="n">extension</span><span class="p">()</span>
+<span class="n">hv</span><span class="o">.</span><span class="n">extension</span><span class="p">(</span><span class="s2">"bokeh"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
 <div class="jp-Cell-outputWrapper">
 <div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
 <script type="esms-options">{"shimMode": true}</script><style>*[data-root-id],
 *[data-root-id] > * {
@@ -8533,9 +8815,10 @@ if (window.Jupyter !== undefined) {
 </div>
 </div>
 <div class="jp-OutputArea-child">
-<div class="jp-RenderedJavaScript jp-OutputArea-output" data-mime-type="application/javascript" id="399e7677-6aae-42f5-90bd-2ecede58b062" tabindex="0">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedJavaScript jp-OutputArea-output" data-mime-type="application/javascript" id="2fd5bce8-33a6-41aa-a9ff-86b66736b741" tabindex="0">
 <script type="text/javascript">
-var element = document.getElementById('399e7677-6aae-42f5-90bd-2ecede58b062');
+var element = document.getElementById('2fd5bce8-33a6-41aa-a9ff-86b66736b741');
 (function(root) {
   function now() {
     return new Date();
@@ -8707,7 +8990,7 @@ var element = document.getElementById('399e7677-6aae-42f5-90bd-2ecede58b062');
     document.body.appendChild(element);
   }
 
-  const js_urls = ["https://cdn.holoviz.org/panel/1.9.4/dist/bundled/reactiveesm/es-module-shims@^1.10.0/dist/es-module-shims.min.js"];
+  const js_urls = ["https://cdn.holoviz.org/panel/1.9.4/dist/bundled/reactiveesm/es-module-shims@^1.10.0/dist/es-module-shims.min.js", "https://cdn.jsdelivr.net/npm/@holoviz/geoviews@1.15.1/dist/geoviews.min.js"];
   const js_modules = [];
   const js_exports = {};
   const css_urls = [];
@@ -8791,9 +9074,10 @@ function(Bokeh) {} // ensure no trailing comma for IE
 </div>
 </div>
 <div class="jp-OutputArea-child">
-<div class="jp-RenderedJavaScript jp-OutputArea-output" data-mime-type="application/javascript" id="3fe9a2e0-5830-4804-b149-c3f5d5a705b3" tabindex="0">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedJavaScript jp-OutputArea-output" data-mime-type="application/javascript" id="b999d20d-844e-4706-94d2-6257165a6701" tabindex="0">
 <script type="text/javascript">
-var element = document.getElementById('3fe9a2e0-5830-4804-b149-c3f5d5a705b3');
+var element = document.getElementById('b999d20d-844e-4706-94d2-6257165a6701');
 
 if ((window.PyViz === undefined) || (window.PyViz instanceof HTMLElement)) {
   window.PyViz = {comms: {}, comm_status:{}, kernels:{}, receivers: {}, plot_index: []}
@@ -9052,13 +9336,14 @@ if (window.Jupyter !== undefined) {
 </div>
 </div>
 <div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
-<div id="454f9dfe-de17-4617-9a3d-a6d061506714">
-<div data-root-id="454f9dfe-de17-4617-9a3d-a6d061506714" id="fa013cfc-cd63-4812-8798-355f881d62e5" style="display: contents;"></div>
+<div id="dfaac4bc-2977-48eb-b638-26e958336874">
+<div data-root-id="dfaac4bc-2977-48eb-b638-26e958336874" id="cee0750d-d129-459d-8fe7-34366888cad6" style="display: contents;"></div>
 </div>
 <script type="application/javascript">(function(root) {
-  var docs_json = {"aee524d5-9e0d-4638-b12b-2478a8fb12f7":{"version":"3.9.2","title":"Bokeh Application","config":{"type":"object","name":"DocumentConfig","id":"ccc2975c-4e39-4ee2-b43a-9a17b4f5ad46","attributes":{"notifications":{"type":"object","name":"Notifications","id":"af39a1db-abd2-4366-a8ff-2fe237bb614c"}}},"roots":[{"type":"object","name":"panel.models.browser.BrowserInfo","id":"454f9dfe-de17-4617-9a3d-a6d061506714"},{"type":"object","name":"panel.models.comm_manager.CommManager","id":"40e06df0-fae5-46c6-acc0-cf80d4e4103a","attributes":{"plot_id":"454f9dfe-de17-4617-9a3d-a6d061506714","comm_id":"26ab9c73d7a749479638041ce79a237d","client_comm_id":"0cd5f7bd7a6f4119aecf67533e24d76b"}}],"defs":[{"type":"model","name":"ReactiveHTML1"},{"type":"model","name":"FlexBox1","properties":[{"name":"align_content","kind":"Any","default":"flex-start"},{"name":"align_items","kind":"Any","default":"flex-start"},{"name":"flex_direction","kind":"Any","default":"row"},{"name":"flex_wrap","kind":"Any","default":"wrap"},{"name":"gap","kind":"Any","default":""},{"name":"justify_content","kind":"Any","default":"flex-start"}]},{"type":"model","name":"FloatPanel1","properties":[{"name":"config","kind":"Any","default":{"type":"map"}},{"name":"contained","kind":"Any","default":true},{"name":"position","kind":"Any","default":"right-top"},{"name":"offsetx","kind":"Any","default":null},{"name":"offsety","kind":"Any","default":null},{"name":"theme","kind":"Any","default":"primary"},{"name":"status","kind":"Any","default":"normalized"}]},{"type":"model","name":"GridStack1","properties":[{"name":"ncols","kind":"Any","default":null},{"name":"nrows","kind":"Any","default":null},{"name":"allow_resize","kind":"Any","default":true},{"name":"allow_drag","kind":"Any","default":true},{"name":"state","kind":"Any","default":[]}]},{"type":"model","name":"drag1","properties":[{"name":"slider_width","kind":"Any","default":5},{"name":"slider_color","kind":"Any","default":"black"},{"name":"start","kind":"Any","default":0},{"name":"end","kind":"Any","default":100},{"name":"value","kind":"Any","default":50}]},{"type":"model","name":"click1","properties":[{"name":"terminal_output","kind":"Any","default":""},{"name":"debug_name","kind":"Any","default":""},{"name":"clears","kind":"Any","default":0}]},{"type":"model","name":"ReactiveESM1","properties":[{"name":"esm_constants","kind":"Any","default":{"type":"map"}}]},{"type":"model","name":"JSComponent1","properties":[{"name":"esm_constants","kind":"Any","default":{"type":"map"}}]},{"type":"model","name":"ReactComponent1","properties":[{"name":"use_shadow_dom","kind":"Any","default":true},{"name":"esm_constants","kind":"Any","default":{"type":"map"}}]},{"type":"model","name":"AnyWidgetComponent1","properties":[{"name":"use_shadow_dom","kind":"Any","default":true},{"name":"esm_constants","kind":"Any","default":{"type":"map"}}]},{"type":"model","name":"FastWrapper1","properties":[{"name":"object","kind":"Any","default":null},{"name":"style","kind":"Any","default":null}]},{"type":"model","name":"NotificationArea1","properties":[{"name":"js_events","kind":"Any","default":{"type":"map"}},{"name":"max_notifications","kind":"Any","default":5},{"name":"notifications","kind":"Any","default":[]},{"name":"position","kind":"Any","default":"bottom-right"},{"name":"_clear","kind":"Any","default":0},{"name":"types","kind":"Any","default":[{"type":"map","entries":[["type","warning"],["background","#ffc107"],["icon",{"type":"map","entries":[["className","fas fa-exclamation-triangle"],["tagName","i"],["color","white"]]}]]},{"type":"map","entries":[["type","info"],["background","#007bff"],["icon",{"type":"map","entries":[["className","fas fa-info-circle"],["tagName","i"],["color","white"]]}]]}]}]},{"type":"model","name":"Notification","properties":[{"name":"background","kind":"Any","default":null},{"name":"duration","kind":"Any","default":3000},{"name":"icon","kind":"Any","default":null},{"name":"message","kind":"Any","default":""},{"name":"notification_type","kind":"Any","default":null},{"name":"_rendered","kind":"Any","default":false},{"name":"_destroyed","kind":"Any","default":false}]},{"type":"model","name":"TemplateActions1","properties":[{"name":"open_modal","kind":"Any","default":0},{"name":"close_modal","kind":"Any","default":0}]},{"type":"model","name":"BootstrapTemplateActions1","properties":[{"name":"open_modal","kind":"Any","default":0},{"name":"close_modal","kind":"Any","default":0}]},{"type":"model","name":"TemplateEditor1","properties":[{"name":"layout","kind":"Any","default":[]}]},{"type":"model","name":"MaterialTemplateActions1","properties":[{"name":"open_modal","kind":"Any","default":0},{"name":"close_modal","kind":"Any","default":0}]},{"type":"model","name":"request_value1","properties":[{"name":"fill","kind":"Any","default":"none"},{"name":"_synced","kind":"Any","default":null},{"name":"_request_sync","kind":"Any","default":0}]}]}};
-  var render_items = [{"docid":"aee524d5-9e0d-4638-b12b-2478a8fb12f7","roots":{"454f9dfe-de17-4617-9a3d-a6d061506714":"fa013cfc-cd63-4812-8798-355f881d62e5"},"root_ids":["454f9dfe-de17-4617-9a3d-a6d061506714"]}];
+  var docs_json = {"28479b88-a107-4561-a63d-66cd97f20770":{"version":"3.9.2","title":"Bokeh Application","config":{"type":"object","name":"DocumentConfig","id":"6efa061b-1c48-432d-9405-fc35a1b45aaf","attributes":{"notifications":{"type":"object","name":"Notifications","id":"54c4a401-af47-4c71-826d-e60a8d7fa64a"}}},"roots":[{"type":"object","name":"panel.models.browser.BrowserInfo","id":"dfaac4bc-2977-48eb-b638-26e958336874"},{"type":"object","name":"panel.models.comm_manager.CommManager","id":"1efb7da9-c148-4646-bdd9-0a1f496880c3","attributes":{"plot_id":"dfaac4bc-2977-48eb-b638-26e958336874","comm_id":"dc050fff67714316ab172f740282e956","client_comm_id":"ba21d643f72e49ecb04da07f1abc9678"}}],"defs":[{"type":"model","name":"ReactiveHTML1"},{"type":"model","name":"FlexBox1","properties":[{"name":"align_content","kind":"Any","default":"flex-start"},{"name":"align_items","kind":"Any","default":"flex-start"},{"name":"flex_direction","kind":"Any","default":"row"},{"name":"flex_wrap","kind":"Any","default":"wrap"},{"name":"gap","kind":"Any","default":""},{"name":"justify_content","kind":"Any","default":"flex-start"}]},{"type":"model","name":"FloatPanel1","properties":[{"name":"config","kind":"Any","default":{"type":"map"}},{"name":"contained","kind":"Any","default":true},{"name":"position","kind":"Any","default":"right-top"},{"name":"offsetx","kind":"Any","default":null},{"name":"offsety","kind":"Any","default":null},{"name":"theme","kind":"Any","default":"primary"},{"name":"status","kind":"Any","default":"normalized"}]},{"type":"model","name":"GridStack1","properties":[{"name":"ncols","kind":"Any","default":null},{"name":"nrows","kind":"Any","default":null},{"name":"allow_resize","kind":"Any","default":true},{"name":"allow_drag","kind":"Any","default":true},{"name":"state","kind":"Any","default":[]}]},{"type":"model","name":"drag1","properties":[{"name":"slider_width","kind":"Any","default":5},{"name":"slider_color","kind":"Any","default":"black"},{"name":"start","kind":"Any","default":0},{"name":"end","kind":"Any","default":100},{"name":"value","kind":"Any","default":50}]},{"type":"model","name":"click1","properties":[{"name":"terminal_output","kind":"Any","default":""},{"name":"debug_name","kind":"Any","default":""},{"name":"clears","kind":"Any","default":0}]},{"type":"model","name":"ReactiveESM1","properties":[{"name":"esm_constants","kind":"Any","default":{"type":"map"}}]},{"type":"model","name":"JSComponent1","properties":[{"name":"esm_constants","kind":"Any","default":{"type":"map"}}]},{"type":"model","name":"ReactComponent1","properties":[{"name":"use_shadow_dom","kind":"Any","default":true},{"name":"esm_constants","kind":"Any","default":{"type":"map"}}]},{"type":"model","name":"AnyWidgetComponent1","properties":[{"name":"use_shadow_dom","kind":"Any","default":true},{"name":"esm_constants","kind":"Any","default":{"type":"map"}}]},{"type":"model","name":"FastWrapper1","properties":[{"name":"object","kind":"Any","default":null},{"name":"style","kind":"Any","default":null}]},{"type":"model","name":"NotificationArea1","properties":[{"name":"js_events","kind":"Any","default":{"type":"map"}},{"name":"max_notifications","kind":"Any","default":5},{"name":"notifications","kind":"Any","default":[]},{"name":"position","kind":"Any","default":"bottom-right"},{"name":"_clear","kind":"Any","default":0},{"name":"types","kind":"Any","default":[{"type":"map","entries":[["type","warning"],["background","#ffc107"],["icon",{"type":"map","entries":[["className","fas fa-exclamation-triangle"],["tagName","i"],["color","white"]]}]]},{"type":"map","entries":[["type","info"],["background","#007bff"],["icon",{"type":"map","entries":[["className","fas fa-info-circle"],["tagName","i"],["color","white"]]}]]}]}]},{"type":"model","name":"Notification","properties":[{"name":"background","kind":"Any","default":null},{"name":"duration","kind":"Any","default":3000},{"name":"icon","kind":"Any","default":null},{"name":"message","kind":"Any","default":""},{"name":"notification_type","kind":"Any","default":null},{"name":"_rendered","kind":"Any","default":false},{"name":"_destroyed","kind":"Any","default":false}]},{"type":"model","name":"TemplateActions1","properties":[{"name":"open_modal","kind":"Any","default":0},{"name":"close_modal","kind":"Any","default":0}]},{"type":"model","name":"BootstrapTemplateActions1","properties":[{"name":"open_modal","kind":"Any","default":0},{"name":"close_modal","kind":"Any","default":0}]},{"type":"model","name":"TemplateEditor1","properties":[{"name":"layout","kind":"Any","default":[]}]},{"type":"model","name":"MaterialTemplateActions1","properties":[{"name":"open_modal","kind":"Any","default":0},{"name":"close_modal","kind":"Any","default":0}]},{"type":"model","name":"request_value1","properties":[{"name":"fill","kind":"Any","default":"none"},{"name":"_synced","kind":"Any","default":null},{"name":"_request_sync","kind":"Any","default":0}]}]}};
+  var render_items = [{"docid":"28479b88-a107-4561-a63d-66cd97f20770","roots":{"dfaac4bc-2977-48eb-b638-26e958336874":"cee0750d-d129-459d-8fe7-34366888cad6"},"root_ids":["dfaac4bc-2977-48eb-b638-26e958336874"]}];
   var docs = Object.values(docs_json)
   if (!docs) {
     return
@@ -9126,6 +9411,7 @@ if (window.Jupyter !== undefined) {
 </div>
 </div>
 <div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output" data-mime-type="text/html" tabindex="0">
 <script type="esms-options">{"shimMode": true}</script><style>*[data-root-id],
 *[data-root-id] > * {
@@ -9146,9 +9432,10 @@ if (window.Jupyter !== undefined) {
 </div>
 </div>
 <div class="jp-OutputArea-child">
-<div class="jp-RenderedJavaScript jp-OutputArea-output" data-mime-type="application/javascript" id="e83c3311-7ca2-413f-9e5a-ba556af60fa2" tabindex="0">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedJavaScript jp-OutputArea-output" data-mime-type="application/javascript" id="664ea4cb-b141-42b8-8214-94495683c82f" tabindex="0">
 <script type="text/javascript">
-var element = document.getElementById('e83c3311-7ca2-413f-9e5a-ba556af60fa2');
+var element = document.getElementById('664ea4cb-b141-42b8-8214-94495683c82f');
 (function(root) {
   function now() {
     return new Date();
@@ -9320,7 +9607,7 @@ var element = document.getElementById('e83c3311-7ca2-413f-9e5a-ba556af60fa2');
     document.body.appendChild(element);
   }
 
-  const js_urls = ["https://cdn.holoviz.org/panel/1.9.4/dist/bundled/reactiveesm/es-module-shims@^1.10.0/dist/es-module-shims.min.js"];
+  const js_urls = ["https://cdn.holoviz.org/panel/1.9.4/dist/bundled/reactiveesm/es-module-shims@^1.10.0/dist/es-module-shims.min.js", "https://cdn.jsdelivr.net/npm/@holoviz/geoviews@1.15.1/dist/geoviews.min.js"];
   const js_modules = [];
   const js_exports = {};
   const css_urls = [];
@@ -9404,9 +9691,10 @@ function(Bokeh) {} // ensure no trailing comma for IE
 </div>
 </div>
 <div class="jp-OutputArea-child">
-<div class="jp-RenderedJavaScript jp-OutputArea-output" data-mime-type="application/javascript" id="c7d20522-f52b-4ccb-9279-66ec11750bd4" tabindex="0">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedJavaScript jp-OutputArea-output" data-mime-type="application/javascript" id="899f0b27-2c24-4176-973b-1ad6ab5b6ed4" tabindex="0">
 <script type="text/javascript">
-var element = document.getElementById('c7d20522-f52b-4ccb-9279-66ec11750bd4');
+var element = document.getElementById('899f0b27-2c24-4176-973b-1ad6ab5b6ed4');
 
 if ((window.PyViz === undefined) || (window.PyViz instanceof HTMLElement)) {
   window.PyViz = {comms: {}, comm_status:{}, kernels:{}, receivers: {}, plot_index: []}
@@ -9666,31 +9954,102 @@ if (window.Jupyter !== undefined) {
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noInput" id="cell-id=0fc2c19e">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=0fc2c19e">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [17]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1">### get the plot bounds</span>
+<span class="n">xmin</span><span class="p">,</span> <span class="n">ymin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">ymax</span> <span class="o">=</span> <span class="n">occurrence_gdf</span><span class="o">.</span><span class="n">total_bounds</span>
+
+<span class="c1">### define the slider widget</span>
+<span class="n">slider</span> <span class="o">=</span> <span class="n">pn</span><span class="o">.</span><span class="n">widgets</span><span class="o">.</span><span class="n">DiscreteSlider</span><span class="p">(</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s1">'month'</span><span class="p">,</span> 
+    <span class="n">options</span> <span class="o">=</span> <span class="p">{</span><span class="n">calendar</span><span class="o">.</span><span class="n">month_name</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">13</span><span class="p">)}</span>
+<span class="p">)</span>
+
+<span class="c1">### make the basemap tile object</span>
+<span class="n">carto_tiles</span> <span class="o">=</span> <span class="n">hv</span><span class="o">.</span><span class="n">Tiles</span><span class="p">(</span>
+    <span class="p">(</span><span class="s2">"https://basemaps.cartocdn.com/rastertiles/voyager/</span><span class="si">{Z}</span><span class="s2">/</span><span class="si">{X}</span><span class="s2">/</span><span class="si">{Y}</span><span class="s2">.png"</span>
+    <span class="s2">"?key=cb1_446c_1_8946b413de0ace50f732dbf1"</span><span class="p">),</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s2">"CARTO"</span>
+<span class="p">)</span>
+
+<span class="c1">### plot occurrence by ecoregion and month</span>
+<span class="n">migration_plot</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">occurrence_gdf</span>
+    <span class="o">.</span><span class="n">hvplot</span><span class="p">(</span>
+        <span class="c1">### color by # of veeries</span>
+        <span class="n">c</span> <span class="o">=</span> <span class="s1">'norm_occurrences'</span><span class="p">,</span>
+
+        <span class="c1">### group by month</span>
+        <span class="n">groupby</span> <span class="o">=</span> <span class="s1">'month'</span><span class="p">,</span>
+
+        <span class="c1">### use background tiles</span>
+        <span class="n">geo</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">crs</span> <span class="o">=</span> <span class="n">ccrs</span><span class="o">.</span><span class="n">Mercator</span><span class="p">(),</span>
+
+        <span class="c1">### add the basemap</span>
+        <span class="n">tiles</span> <span class="o">=</span> <span class="n">carto_tiles</span><span class="p">,</span>
+
+        <span class="c1">### add a title</span>
+        <span class="n">title</span> <span class="o">=</span> <span class="s2">"Arctic Tern migration from January through December of 2020"</span><span class="p">,</span>
+
+        <span class="c1">### set plot boundaries</span>
+        <span class="n">xlim</span> <span class="o">=</span> <span class="p">(</span><span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">),</span> <span class="n">ylim</span> <span class="o">=</span> <span class="p">(</span><span class="n">ymin</span><span class="p">,</span> <span class="n">ymax</span><span class="p">),</span>
+
+        <span class="c1">### set dimensions of map</span>
+        <span class="n">frame_height</span> <span class="o">=</span> <span class="mi">600</span><span class="p">,</span>
+        <span class="n">frame_width</span> <span class="o">=</span> <span class="mi">900</span><span class="p">,</span>
+
+        <span class="c1">### put the widget at the bottom of the map</span>
+        <span class="n">widget_location</span> <span class="o">=</span> <span class="s1">'bottom'</span><span class="p">,</span>
+        <span class="n">colorbar</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">widgets</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'month'</span><span class="p">:</span> <span class="n">slider</span><span class="p">}</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1">### wrap  plot in the Panel layout</span>
+<span class="n">interactive_migration_plot</span> <span class="o">=</span> <span class="n">pn</span><span class="o">.</span><span class="n">panel</span><span class="p">(</span><span class="n">migration_plot</span><span class="p">)</span>
+
+<span class="c1">### make a path for your map to live</span>
+<span class="n">map_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="s2">"migration_plot.html"</span><span class="p">)</span>
+
+<span class="c1">### export the map as an .html file</span>
+<span class="n">migration_plot</span><span class="o">.</span><span class="n">save</span><span class="p">(</span>
+    <span class="n">map_path</span><span class="p">,</span>
+    <span class="n">embed</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">resources</span> <span class="o">=</span> <span class="s2">"inline"</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
 <div class="jp-Cell-outputWrapper">
 <div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
 <pre>                                               </pre>
 </div>
 </div>
 <div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>WARNING:bokeh.core.validation.check:W-1005 (FIXED_SIZING_MODE): 'fixed' sizing mode requires width and height to be set: figure(id='777d1cde-5f74-4a91-9265-02a4ae044da4', ...)
+<pre>WARNING:bokeh.core.validation.check:W-1005 (FIXED_SIZING_MODE): 'fixed' sizing mode requires width and height to be set: figure(id='6eb333a4-911d-4f26-8197-2e2c98352fa8', ...)
 </pre>
 </div>
 </div>
 <div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
 <pre>
 </pre>
-</div>
-</div>
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
-<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
-<pre>BokehModel(combine_events=True, render_bundle={'docs_json': {'41ffc558-b2b1-47fe-9c59-7ce1c5975822': {'version…</pre>
 </div>
 </div>
 </div>
@@ -9700,41 +10059,70 @@ if (window.Jupyter !== undefined) {
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Interactive-Map">Interactive Map<a class="anchor-link" href="#Interactive-Map">¶</a></h2><blockquote>
-<p>&lt;<embed type="text/html" src="migration-plot.html" width="600" height="600">&gt;</p>
-<p>Another way of visualizing the data seen in the previously shown scatterplot is in an interactive map. Here, we show the spatial distribution of Arctic Tern by month. This gives us insight into some of the trends in migration patterns that may exist for this species.</p>
-</blockquote>
-<h2 id="Limitations">Limitations<a class="anchor-link" href="#Limitations">¶</a></h2><blockquote>
-<p>Some limitations that are important to note include the fact that the occurrence data used here is limited by observations.</p>
-</blockquote>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<p>&lt;<embed type="text/html" src="migration_plot.html" width="800" height="600">&gt;</p>
+<h2 id="Interactive-Map-of-Arctic-Tern-Migration">Interactive Map of Arctic Tern Migration<a class="anchor-link" href="#Interactive-Map-of-Arctic-Tern-Migration">¶</a></h2><p>Here, I show the spatial distribution of Arctic Tern by month. The moveable bar at the bottom of the map can be used to scroll through the different months of data for 2020. This gives us insight into some of the trends in migration patterns that may exist for this species.</p>
 </div>
 </div>
-<p>&lt;<embed type="text/html" src="migration_plot.html" width="600" height="600">&gt;</p>
 </div>
 </div>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=74ff173e">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Bibliography">Bibliography<a class="anchor-link" href="#Bibliography">¶</a></h2><blockquote>
-<p>Morten, J. M., Buchanan, P. J., Egevang, C., Glissenaar, I. A., Maxwell, S. M., Parr, N., Screen, J. A., Vigfusdottir, F., Vogt-Vincent, N., S., Williams, D. A. (2023) Global warming and arctic terns: Estimating climate change impacts on the world's longest migration. Global Change Biology. <a href="https://doi.org/10.1111/gbc.16891">https://doi.org/10.1111/gbc.16891</a></p>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Bibliography">Bibliography<a class="anchor-link" href="#Bibliography">¶</a></h2><p>Morten, J. M., Buchanan, P. J., Egevang, C., Glissenaar, I. A., Maxwell, S. M., Parr, N., Screen, J. A., Vigfusdottir, F., Vogt-Vincent, N., S., Williams, D. A. (2023) Global warming and arctic terns: Estimating climate change impacts on the world's longest migration. Global Change Biology. <a href="https://doi.org/10.1111/gbc.16891">https://doi.org/10.1111/gbc.16891</a></p>
 <p>Alerstam, T., Backman, J., Gronroos, J., Olofsson, P., Strandberg, R. (2019) Hypotheses and tracking results about the longest migration: The case of the arctic tern. Ecology and Evolution. <a href="https://doi.org/10.1002/ece3.5459">https://doi.org/10.1002/ece3.5459</a></p>
-</blockquote>
+<p>Henri, D. A., Martinez-Levasseur, L. M., Weetaltuk, S., Mallory, M. L., Gilchrist, H. G., Jean-Gagnon, F. (2020) Inuit knowledge of Arctic Terns (Sterna paradisaea) and perspectives on declining abundance in southeastern Hudson Bay, Canada</p>
+<p>GBIF (2026) Sterna paradisaea Pntoppidan, 1763. <a href="https://www.gbif.org/taxon/6ZSDC">https://www.gbif.org/taxon/6ZSDC</a></p>
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noInput" id="cell-id=4e82eded">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=4e82eded">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [18]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="o">!</span>jupyter<span class="w"> </span>nbconvert<span class="w"> </span><span class="m">06</span>-portfolio-post.ipynb<span class="w"> </span>--to<span class="w"> </span>html<span class="w"> </span>#<span class="w"> </span>--no-input
+</pre></div>
+</div>
+</div>
+</div>
+</div>
 <div class="jp-Cell-outputWrapper">
 <div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
 </div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr" tabindex="0">
-<pre>[NbConvertApp] Converting notebook 06-portfolio-post.ipynb to html
-[NbConvertApp] WARNING | Alternative text is missing on 1 image(s).
-[NbConvertApp] Writing 445945 bytes to 06-portfolio-post.html
+<pre>usage: jupyter-nbconvert [-h] [--debug] [--show-config] [--show-config-json]
+                         [--generate-config] [-y] [--execute] [--allow-errors]
+                         [--stdin] [--stdout] [--inplace] [--clear-output]
+                         [--coalesce-streams] [--no-prompt] [--no-input]
+                         [--allow-chromium-download]
+                         [--disable-chromium-sandbox] [--show-input]
+                         [--embed-images] [--sanitize-html]
+                         [--log-level NbConvertApp.log_level]
+                         [--config NbConvertApp.config_file]
+                         [--to NbConvertApp.export_format]
+                         [--template TemplateExporter.template_name]
+                         [--template-file TemplateExporter.template_file]
+                         [--theme HTMLExporter.theme]
+                         [--sanitize_html HTMLExporter.sanitize_html]
+                         [--writer NbConvertApp.writer_class]
+                         [--post NbConvertApp.postprocessor_class]
+                         [--output NbConvertApp.output_base]
+                         [--output-dir FilesWriter.build_directory]
+                         [--reveal-prefix SlidesExporter.reveal_url_prefix]
+                         [--nbformat NotebookExporter.nbformat_version]
+                         [extra_args ...]
+jupyter-nbconvert: error: unrecognized arguments: #
 </pre>
 </div>
 </div>
